@@ -28,12 +28,21 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           IconButton(
-              icon: Icon(
-                LineIcons.user,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () => {}),
+            icon: Icon(
+              LineIcons.shopping_cart,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () => {},
+          ),
+          IconButton(
+            icon: Icon(
+              LineIcons.user,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () => {},
+          ),
         ],
       ),
       body: SingleChildScrollView(),
