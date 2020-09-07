@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/authen.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 
 class LoginController extends GetxController {
   var username = "".obs;
@@ -16,10 +15,12 @@ class LoginController extends GetxController {
   var accessToken = "".obs;
   var refreshToken = "".obs;
   var expiresIn = 0.obs;
+
   AuthenModel authenModel;
-  loginClick() async {
-    authenModel = await Authen().getLoginAuthen(username.value, password.value);
-    if (authenModel.error == null) {
+
+  loginClick(username, password) async {
+    authenModel = await Authen().getLoginAuthen(username, password);
+    if (authenModel.error == "") {
       gruntType.value = authenModel.gruntType;
       accessToken.value = authenModel.accessToken;
       refreshToken.value = authenModel.refreshToken;
@@ -28,15 +29,15 @@ class LoginController extends GetxController {
       error.value = authenModel.error;
       errorDescription.value = authenModel.errorDescription;
       Get.snackbar("Login failed", authenModel.errorDescription,
-          icon: Icon(Icons.error));
+          icon: Icon(EvaIcons.alertCircleOutline));
     }
   }
 
-  usernameChanged(username) {
-    username.value = username;
+  usernameChanged(sUsername) {
+    username.value = sUsername;
   }
 
-  passwordChanged(password) {
-    password.value = password;
+  passwordChanged(sPassword) {
+    password.value = sPassword;
   }
 }

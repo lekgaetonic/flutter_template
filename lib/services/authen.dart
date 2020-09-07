@@ -41,7 +41,6 @@ class Authen extends ServiceBase {
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final http = new IOClient(ioc);
-
     var response = await http.post('$endpoint$path', body: {
       'client_id': clientId,
       'client_secret': clientSecret,
@@ -51,7 +50,7 @@ class Authen extends ServiceBase {
     });
 
     var jsonResponse = convert.jsonDecode(response.body);
-    print(response.statusCode);
+    print(jsonResponse);
     if (response.statusCode == 200) {
       _authenModel.accessToken = jsonResponse['access_token'];
       _authenModel.expiresIn = jsonResponse['expires_in'];

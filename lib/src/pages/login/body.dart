@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/src/pages/home/main.dart';
 import 'package:flutter_getx/src/pages/login/controller.dart';
 import 'package:get/get.dart';
 
@@ -49,7 +50,11 @@ class LoginBody extends StatelessWidget {
             height: 44,
             width: double.infinity,
             child: RaisedButton(
-              onPressed: () => {_loginController.loginClick()},
+              onPressed: () => {
+                _loginController.loginClick(_loginController.username.value,
+                    _loginController.password.value),
+                _loginController.error == '' ? Get.to(HomePage()) : ''
+              },
               color: Color(0xFFF5821f),
               child: Text(
                 'login'.tr,
@@ -97,8 +102,8 @@ class LoginBody extends StatelessWidget {
                     )),
               ))
             : '',
-        //Obx(() => Text("password: ${_loginController.password}")),
-        // Obx(() => Text("password: ${_loginController.count}")),
+        Obx(() => Text("username: ${_loginController.username}")),
+        Obx(() => Text("password: ${_loginController.password}")),
       ],
     );
   }
@@ -115,6 +120,7 @@ class LoginBody extends StatelessWidget {
 
   _tfdUsername() {
     return TextField(
+      autofocus: true,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: 'email'.tr,
