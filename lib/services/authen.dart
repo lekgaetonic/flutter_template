@@ -9,8 +9,8 @@ class Authen extends ServiceBase {
   Authen() : super();
 
   String path = '/authorizationserver/oauth/token';
-
-  Future<http.Response> getBasicAuthen() async {
+  AuthenModel _authenModel = AuthenModel();
+  Future<AuthenModel> getBasicAuthen() async {
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
@@ -22,21 +22,23 @@ class Authen extends ServiceBase {
       'grant_type': grantTypeClientCredentials
     });
 
+    var jsonResponse = convert.jsonDecode(response.body);
+    print(jsonResponse);
     if (response.statusCode == 200) {
-      var jsonResponse = convert.jsonDecode(response.body);
-      var accessToken = jsonResponse['access_token'];
-      var expiresIn = jsonResponse['expires_in'];
-      print('accessToken: $accessToken.');
-      print('expires_in: $expiresIn.');
+      _authenModel.accessToken = jsonResponse['access_token'];
+      _authenModel.expiresIn = jsonResponse['expires_in'];
+      _authenModel.gruntType = grantTypePassword;
+      _authenModel.refreshToken = jsonResponse['refresh_token'];
     } else {
-      print('Request failed with status: ${response.statusCode}.');
+      print(jsonResponse['error']);
+      _authenModel.error = jsonResponse['error'];
+      _authenModel.errorDescription = jsonResponse['error_description'];
     }
 
-    return response;
+    return _authenModel;
   }
 
   Future<AuthenModel> getLoginAuthen(username, password) async {
-    AuthenModel _authenModel = AuthenModel();
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;

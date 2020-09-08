@@ -11,6 +11,7 @@ class LoginPage extends StatelessWidget {
         preferredSize: Size.fromHeight(56.0), // here the desired height
         child: LoginAppBar(),
       ),
+      //extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: LoginBody(),
       ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-class LoginAppBar extends StatelessWidget {
+class SharedAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      //backgroundColor: Colors.transparent,
-      //elevation: 0,
       leading: IconButton(
         icon: Icon(
           LineIcons.bars,
@@ -23,12 +21,21 @@ class LoginAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-            icon: Icon(
-              LineIcons.user,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () => {}),
+          icon: Icon(
+            LineIcons.shopping_cart,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () => {},
+        ),
+        IconButton(
+          icon: Icon(
+            LineIcons.user,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () => {},
+        ),
       ],
     );
   }
