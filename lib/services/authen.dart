@@ -27,7 +27,7 @@ class Authen extends ServiceBase {
     if (response.statusCode == 200) {
       _authenModel.accessToken = jsonResponse['access_token'];
       _authenModel.expiresIn = jsonResponse['expires_in'];
-      _authenModel.gruntType = grantTypePassword;
+      _authenModel.gruntType = grantTypeClientCredentials;
       _authenModel.refreshToken = jsonResponse['refresh_token'];
     } else {
       print(jsonResponse['error']);

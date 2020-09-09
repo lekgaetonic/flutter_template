@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:flutter_getx/src/pages/home/main.dart';
 import 'package:flutter_getx/src/pages/login/controller.dart';
 import 'package:get/get.dart';
 
 class LoginBody extends StatelessWidget {
-  final LoginController _loginController = Get.put(LoginController());
+  final AuthenController _authenController = Get.put(AuthenController());
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,9 +52,9 @@ class LoginBody extends StatelessWidget {
             width: double.infinity,
             child: RaisedButton(
               onPressed: () => {
-                _loginController.loginClick(_loginController.username.value,
-                    _loginController.password.value),
-                _loginController.error == '' ? Get.to(HomePage()) : ''
+                _authenController.fetchLogin(_authenController.username.value,
+                    _authenController.password.value),
+                _authenController.error.value == '' ? Get.to(HomePage()) : ''
               },
               color: Color(0xFFF5821f),
               child: Text(
@@ -87,13 +88,13 @@ class LoginBody extends StatelessWidget {
           ),
           padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
         ),
-        _loginController.error != null
+        _authenController.error != null
             ? Container(
                 child: SizedBox(
                 height: 44,
                 width: double.infinity,
                 child: Obx(() => Text(
-                      "${_loginController.errorDescription}",
+                      "${_authenController.errorDescription}",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.red,
@@ -102,8 +103,8 @@ class LoginBody extends StatelessWidget {
                     )),
               ))
             : '',
-        Obx(() => Text("username: ${_loginController.username}")),
-        Obx(() => Text("password: ${_loginController.password}")),
+        // Obx(() => Text("username: ${_authenController.username}")),
+        // Obx(() => Text("password: ${_authenController.password}")),
       ],
     );
   }
@@ -125,7 +126,7 @@ class LoginBody extends StatelessWidget {
         border: OutlineInputBorder(),
         labelText: 'email'.tr,
       ),
-      onChanged: (value) => {_loginController.usernameChanged(value)},
+      onChanged: (value) => {_authenController.usernameChanged(value)},
     );
   }
 
@@ -136,7 +137,7 @@ class LoginBody extends StatelessWidget {
         border: OutlineInputBorder(),
         labelText: 'password'.tr,
       ),
-      onChanged: (value) => {_loginController.passwordChanged(value)},
+      onChanged: (value) => {_authenController.passwordChanged(value)},
     );
   }
 }

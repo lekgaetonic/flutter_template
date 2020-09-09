@@ -4,21 +4,32 @@ import 'package:flutter_getx/locales/messages.dart';
 import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/authen.dart';
 import 'package:flutter_getx/src/pages/error/main.dart';
+import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/pages/login/main.dart';
+import 'package:flutter_getx/src/pages/shared/loadingpage.dart';
 import 'package:get/get.dart';
+
+import 'authen/controller.dart';
+import 'pages/home/main.dart';
 
 class App extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
+    final AuthenController _authenController = Get.put(AuthenController());
+    
+    if (_authenController.accessToken.value == "")
+    {
+      _authenController.fetchAuthen();
+    }
+    
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       translations: Messages(), // your translations
       // locale: ui.window.locale,
-      locale:
-          Locale('th', 'TH'), // translations will be displayed in that locale
-      fallbackLocale: Locale('en',
-          'US'), // specify the fallback locale in case an invalid locale is selected.
+      locale: Locale('th', 'TH'), 
+      fallbackLocale: Locale('en', 'US'),
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Sukhumvit',
@@ -27,32 +38,11 @@ class App extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: SafeArea(
-        child: ErrorPage(),
+        child: Obx(() {
+          return _authenController.accessToken.value == "" ? LoadingPage() : HomePage();}),
       ),
     );
   }
-
-  AuthenModel authenModel;
-  getAuthen() async {
-    authenModel = await Authen().getBasicAuthen();
-    if (authenModel.error == "") {
-      gruntType.value = authenModel.gruntType;
-      accessToken.value = authenModel.accessToken;
-      refreshToken.value = authenModel.refreshToken;
-      expiresIn.value = authenModel.expiresIn;
-    } else {
-      error.value = authenModel.error;
-      errorDescription.value = authenModel.errorDescription;
-      Get.snackbar("Login failed", authenModel.errorDescription,
-          icon: Icon(EvaIcons.alertCircleOutline));
-    }
-  }
-
-  var error = "".obs;
-  var errorDescription = "".obs;
-
-  var gruntType = "".obs;
-  var accessToken = "".obs;
-  var refreshToken = "".obs;
-  var expiresIn = 0.obs;
 }
+//Obx(() => _authenController.accessToken.value != "" ? HomePage() : ErrorPage())
+//Obx(() { return _authenController.accessToken.value != "" ? HomePage() : ErrorPage();})
