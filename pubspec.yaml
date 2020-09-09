@@ -32,6 +32,7 @@ dependencies:
   dio: ^3.0.10
   http: ^0.12.2
   line_icons: ^0.2.0
+  cached_network_image: ^2.3.1
 
 dev_dependencies:
   flutter_test:

@@ -4,7 +4,7 @@ import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/authen.dart';
 import 'package:get/get.dart';
 
-class LoginController extends GetxController {
+class LoginPageController extends GetxController {
   var username = "".obs;
   var password = "".obs;
 

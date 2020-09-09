@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx/locales/messages.dart';
 import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/authen.dart';
-import 'package:flutter_getx/src/pages/error/main.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/pages/login/main.dart';
 import 'package:flutter_getx/src/pages/shared/loadingpage.dart';
@@ -18,17 +17,16 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthenController _authenController = Get.put(AuthenController());
-    
-    if (_authenController.accessToken.value == "")
-    {
+
+    if (_authenController.accessToken.value == "") {
       _authenController.fetchAuthen();
     }
-    
+
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       translations: Messages(), // your translations
       // locale: ui.window.locale,
-      locale: Locale('th', 'TH'), 
+      locale: Locale('th', 'TH'),
       fallbackLocale: Locale('en', 'US'),
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -39,7 +37,10 @@ class App extends StatelessWidget {
       ),
       home: SafeArea(
         child: Obx(() {
-          return _authenController.accessToken.value == "" ? LoadingPage() : HomePage();}),
+          return _authenController.accessToken.value == ""
+              ? LoadingPage()
+              : HomePage();
+        }),
       ),
     );
   }

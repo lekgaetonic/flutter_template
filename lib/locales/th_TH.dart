@@ -4,4 +4,5 @@ const Map<String, String> th_TH = {
   'password': 'รหัสผ่าน',
   'forgot_password': 'ลิมรหัสผ่าน',
   'register': 'สมัครสมาชิก',
+  'search': 'ค้นหา',
 };

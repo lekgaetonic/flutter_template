@@ -6,7 +6,7 @@ import 'package:get/state_manager.dart';
 import '../../../models/authen.dart';
 import '../../../services/authen.dart';
 
-class HomePageController extends GetxController{
+class HomePageController extends GetxController {
   AuthenModel authenModel;
   getAuthen() async {
     authenModel = await Authen().getBasicAuthen();
