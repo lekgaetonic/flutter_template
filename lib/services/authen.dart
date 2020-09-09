@@ -5,8 +5,8 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 
-class Authen extends ServiceBase {
-  Authen() : super();
+class AuthenService extends ServiceBase {
+  AuthenService() : super();
 
   String path = '/authorizationserver/oauth/token';
   AuthenModel _authenModel = AuthenModel();

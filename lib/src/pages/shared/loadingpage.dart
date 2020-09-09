@@ -4,8 +4,9 @@ class LoadingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: Container(
-        child: Center(child: Text('loading.'),),
+      body: Image(
+        height: MediaQuery.of(context).size.height,
+        image: AssetImage("assets/images/loading.gif"),
       ),
     );
   }

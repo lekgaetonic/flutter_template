@@ -19,7 +19,7 @@ class LoginPageController extends GetxController {
   AuthenModel authenModel;
 
   loginClick(username, password) async {
-    authenModel = await Authen().getLoginAuthen(username, password);
+    authenModel = await AuthenService().getLoginAuthen(username, password);
     if (authenModel.error == "") {
       gruntType.value = authenModel.gruntType;
       accessToken.value = authenModel.accessToken;

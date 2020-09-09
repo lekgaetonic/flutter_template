@@ -4,4 +4,6 @@ class ServiceBase {
   String clientSecret = 'secret';
   String grantTypeClientCredentials = 'client_credentials';
   String grantTypePassword = 'password';
+  String webroot = 'rest';
+  String basesite = 'ktw';
 }

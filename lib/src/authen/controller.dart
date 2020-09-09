@@ -9,7 +9,7 @@ import '../../services/authen.dart';
 class AuthenController extends GetxController {
   AuthenModel authenModel;
   fetchAuthen() async {
-    authenModel = await Authen().getBasicAuthen();
+    authenModel = await AuthenService().getBasicAuthen();
     if (authenModel.error == "") {
       gruntType.value = authenModel.gruntType;
       accessToken.value = authenModel.accessToken;
@@ -24,7 +24,7 @@ class AuthenController extends GetxController {
   }
 
   fetchLogin(username, password) async {
-    authenModel = await Authen().getLoginAuthen(username, password);
+    authenModel = await AuthenService().getLoginAuthen(username, password);
     if (authenModel.error == "") {
       gruntType.value = authenModel.gruntType;
       accessToken.value = authenModel.accessToken;
