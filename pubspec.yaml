@@ -33,6 +33,7 @@ dependencies:
   http: ^0.12.2
   line_icons: ^0.2.0
   cached_network_image: ^2.3.1
+  carousel_pro: ^1.0.0
 
 dev_dependencies:
   flutter_test:

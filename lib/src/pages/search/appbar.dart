@@ -22,7 +22,7 @@ class SuggestionSearchAppBar extends StatelessWidget {
       ),
       title: TextField(
         onChanged: (text) => {_searchSuggestionController.keywordChanged(text)},
-        style: TextStyle(fontSize: 18.0, color: Colors.black87),
+        style: TextStyle(fontSize: 20.0, color: Colors.white),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
           focusedBorder: OutlineInputBorder(
@@ -38,7 +38,7 @@ class SuggestionSearchAppBar extends StatelessWidget {
           suffixIcon: IconButton(
               icon: Icon(
                 EvaIcons.search,
-                color: Colors.black54,
+                color: Colors.white,
               ),
               onPressed: () => {}),
         ),
@@ -46,9 +46,9 @@ class SuggestionSearchAppBar extends StatelessWidget {
       actions: [
         IconButton(
             icon: Icon(
-              LineIcons.user,
+              LineIcons.camera,
               color: Colors.white,
-              size: 30,
+              size: 36,
             ),
             onPressed: () => {}),
       ],

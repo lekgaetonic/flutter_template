@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert' as convert;
+import 'package:flutter_getx/models/cms.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/service_base.dart';
@@ -16,7 +17,7 @@ class CmsService extends ServiceBase {
 
   final AuthenController _authenController = Get.find<AuthenController>();
 
-  Future<String> getHomePage() async {
+  Future<CmsHomePageModel> getHomePage() async {
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
@@ -27,7 +28,8 @@ class CmsService extends ServiceBase {
       'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
     });
     var jsonResponse = convert.jsonDecode(response.body);
-    print(jsonResponse.toString().length);
-    return response.body;
+    CmsHomePageModel model = CmsHomePageModel.fromJson(jsonResponse);
+
+    return model;
   }
 }
