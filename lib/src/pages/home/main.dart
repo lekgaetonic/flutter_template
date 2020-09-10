@@ -17,18 +17,43 @@ class HomePage extends StatelessWidget {
         preferredSize: Size.fromHeight(56.0), // here the desired height
         child: SharedAppBar(),
       ),
-      body: SingleChildScrollView(
-        child: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: Obx(
-            () => ListView.builder(
-              itemCount: _homePageController.cmsHomePageModel.sections.length,
-              itemBuilder: (context, index) {
-                return buildListTile(index);
-              },
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 250.0,
+            // width: 300.0,
+            child: Carousel(
+              images: [
+                NetworkImage(
+                    'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
+                NetworkImage(
+                    'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
+                // ExactAssetImage("assets/images/LaunchImage.jpg"),
+              ],
             ),
           ),
-        ),
+          // Obx(() => _homePageController.cmsHomePageModel.sections.forEach((element) {
+          //   SizedBox(
+          //     height: MediaQuery.of(context).size.height,
+          //     child:Text(element.type),
+          //   );
+          // }),
+          // SingleChildScrollView(
+          //   child: SizedBox(
+          //     height: MediaQuery.of(context).size.height,
+          //     child: Obx(
+          //       () => ListView.builder(
+          //         itemCount:
+          //             _homePageController.cmsHomePageModel.sections.length ?? 0,
+          //         itemBuilder: (context, index) {
+          //           return buildListTile(index);
+          //         },
+          //       ),
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }
