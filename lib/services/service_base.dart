@@ -1,9 +1,8 @@
 class ServiceBase {
-  String endpoint = 'https://ktwdevapi.ktw.co.th';
-  String clientId = 'mobile_android';
-  String clientSecret = 'secret';
-  String grantTypeClientCredentials = 'client_credentials';
-  String grantTypePassword = 'password';
-  String webroot = 'rest';
-  String basesite = 'ktw';
+  ServiceBase() : super();
+  final String endpoint = 'https://ktwdevapi.ktw.co.th';
+  final String clientId = 'mobile_android';
+  final String clientSecret = 'secret';
+  final String grantTypeClientCredentials = 'client_credentials';
+  final String grantTypePassword = 'password';
 }

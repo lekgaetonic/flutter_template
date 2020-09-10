@@ -5,14 +5,17 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
+  HomePageController _homePageController = Get.put(HomePageController());
+
   @override
   Widget build(BuildContext context) {
+    _homePageController.fetchHomePage();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0), // here the desired height
         child: SharedAppBar(),
       ),
-      body: SingleChildScrollView(),
+      body: SingleChildScrollView(child:Obx(() => Text("${_homePageController.body}")),),
     );
   }
 }

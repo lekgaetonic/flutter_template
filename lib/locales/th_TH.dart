@@ -5,4 +5,5 @@ const Map<String, String> th_TH = {
   'forgot_password': 'ลิมรหัสผ่าน',
   'register': 'สมัครสมาชิก',
   'search': 'ค้นหา',
+  'loginlater': 'เข้าสู่ระบบภายหลัง',
 };

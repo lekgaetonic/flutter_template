@@ -5,4 +5,5 @@ const Map<String, String> en_US = {
   'forgot_password': 'Forgot Password',
   'register': 'Register',
   'search': 'Search',
+  'loginlater': 'Login Later',
 };

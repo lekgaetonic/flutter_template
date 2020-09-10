@@ -24,6 +24,9 @@ class AuthenController extends GetxController {
   }
 
   fetchLogin(username, password) async {
+    error.value = "";
+    errorDescription .value= "";
+    
     authenModel = await AuthenService().getLoginAuthen(username, password);
     if (authenModel.error == "") {
       gruntType.value = authenModel.gruntType;
@@ -36,6 +39,16 @@ class AuthenController extends GetxController {
       Get.snackbar("Login failed", authenModel.errorDescription,
           icon: Icon(EvaIcons.alertCircleOutline));
     }
+  }
+
+  fetchLogout() async {
+
+    username.value = "";
+    password.value = "";
+    error.value = "";
+    errorDescription .value= "";
+
+    fetchAuthen();
   }
 
   usernameChanged(sUsername) {

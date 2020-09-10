@@ -40,7 +40,7 @@ class LoginBody extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.blueGrey.shade500,
-                fontWeight: FontWeight.bold,
+                // fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -88,10 +88,10 @@ class LoginBody extends StatelessWidget {
           ),
           padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
         ),
-        _authenController.error != null
+        _authenController.error.value != ""
             ? Container(
                 child: SizedBox(
-                height: 44,
+                height: 20,
                 width: double.infinity,
                 child: Obx(() => Text(
                       "${_authenController.errorDescription}",
@@ -102,7 +102,27 @@ class LoginBody extends StatelessWidget {
                           fontSize: 18),
                     )),
               ))
-            : '',
+            : SizedBox(height: 20,),
+        Container(
+          child: SizedBox(
+            height: 44,
+            width: double.infinity,
+            child: RaisedButton(
+              onPressed: () => {Get.to(HomePage())},
+              color: Colors.black54,
+              child: Text(
+                'loginlater'.tr,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          padding: EdgeInsets.fromLTRB(15, 10, 15, 5),
+        ),
+
         // Obx(() => Text("username: ${_authenController.username}")),
         // Obx(() => Text("password: ${_authenController.password}")),
       ],

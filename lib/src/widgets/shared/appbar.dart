@@ -42,7 +42,7 @@ class SharedAppBar extends StatelessWidget {
                   icon: Icon(
                     LineIcons.shopping_cart,
                     color: Colors.white,
-                    size: 30,
+                    size: 34,
                   ),
                   onPressed: () => {},
                 )
@@ -57,6 +57,22 @@ class SharedAppBar extends StatelessWidget {
                     size: 32,
                   ),
                   onPressed: () => {Get.to(LoginPage())},
+                )
+              : Container();
+        }),
+        Obx(() {
+          return _authenController.gruntType.value == "password"
+              ? IconButton(
+                  icon: Icon(
+                    LineIcons.sign_out,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () => { 
+                    print(_authenController.accessToken),
+                    _authenController.fetchLogout(),
+                    print(_authenController.accessToken),
+                    Get.to(LoginPage())},
                 )
               : Container();
         }),
