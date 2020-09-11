@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
 import 'package:get/get.dart';
-import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
   HomePageController _homePageController = Get.put(HomePageController());
@@ -19,92 +18,69 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SizedBox(
-            height: 250.0,
-            // width: 300.0,
-            child: Carousel(
-              images: [
-                NetworkImage(
-                    'https://cdn-images-1.medium.com/max/2000/1*GqdzzfB_BHorv7V2NV7Jgg.jpeg'),
-                NetworkImage(
-                    'https://cdn-images-1.medium.com/max/2000/1*wnIEgP1gNMrK5gZU7QS0-A.jpeg'),
-                // ExactAssetImage("assets/images/LaunchImage.jpg"),
-              ],
-            ),
-          ),
-          // Obx(() => _homePageController.cmsHomePageModel.sections.forEach((element) {
-          //   SizedBox(
-          //     height: MediaQuery.of(context).size.height,
-          //     child:Text(element.type),
-          //   );
-          // }),
-          // SingleChildScrollView(
-          //   child: SizedBox(
-          //     height: MediaQuery.of(context).size.height,
-          //     child: Obx(
-          //       () => ListView.builder(
-          //         itemCount:
-          //             _homePageController.cmsHomePageModel.sections.length ?? 0,
-          //         itemBuilder: (context, index) {
-          //           return buildListTile(index);
-          //         },
-          //       ),
-          //     ),
-          //   ),
-          // ),
-        ],
+        children:
+            buildListWidget(_homePageController.cmsHomePageModel.sections),
       ),
     );
   }
 
-  ListTile buildListTile(int index) {
-    print(_homePageController.cmsHomePageModel.sections[index].type);
-    if (_homePageController.cmsHomePageModel.sections[index].type ==
-        "RotatingImagesComponent") {
-      return ListTile(
-        leading: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
-        trailing: Icon(EvaIcons.activity),
-        subtitle: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].type}'),
-        title: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].section}'),
-      );
-    } else if (_homePageController.cmsHomePageModel.sections[index].type ==
-        "SimpleBannerComponent") {
-      return ListTile(
-        leading: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
-        trailing: Icon(EvaIcons.activity),
-        subtitle: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].type}'),
-        title: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].section}'),
-      );
-    } else if (_homePageController.cmsHomePageModel.sections[index].type ==
-            "BannerComponent" ||
-        _homePageController.cmsHomePageModel.sections[index].type ==
-            "KTWBannerComponent") {
-      return ListTile(
-        leading: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
-        trailing: Icon(EvaIcons.activity),
-        subtitle: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].type}'),
-        title: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].section}'),
-      );
-    } else {
-      return ListTile(
-        leading: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
-        trailing: Icon(EvaIcons.activity),
-        subtitle: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].type}'),
-        title: Text(
-            '${_homePageController.cmsHomePageModel.sections[index].section}'),
-      );
-    }
+  //https://stackoverflow.com/questions/56947046/flutter-for-loop-to-generate-list-of-widgets/56947190
+  List<Widget> buildListWidget(data) {
+    return List.generate(data.length, (index) {
+      if (_homePageController.cmsHomePageModel.sections[index].type ==
+          "RotatingImagesComponent") {
+        return SizedBox(
+          height: 150.0,
+          // width: 300.0,
+          child: Carousel(
+            images: [
+              NetworkImage(
+                  'https://ktwdevapi.ktw.co.th/medias/sys_master/images/images/h8b/h1b/8845807026206/Happy-May-1900x650.jpg'),
+              NetworkImage(
+                  'https://ktwdevapi.ktw.co.th/medias/sys_master/images/images/h32/h4a/8845808205854/TOHO-1900x650s.jpg'),
+              NetworkImage(
+                  'https://ktwdevapi.ktw.co.th/medias/sys_master/images/images/h32/h4a/8845808205854/TOHO-1900x650s.jpg'),
+              NetworkImage(
+                  'https://shop.ktw.co.th/medias/sys_master/images/images/h65/hb9/9088749633566/5.-1900x650-3.jpg'),
+              // ExactAssetImage("assets/images/LaunchImage.jpg"),
+            ],
+          ),
+        );
+      } else if (_homePageController.cmsHomePageModel.sections[index].type ==
+          "SimpleBannerComponent") {
+        return ListTile(
+          leading: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
+          trailing: Icon(EvaIcons.activity),
+          subtitle: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].type}'),
+          title: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].section}'),
+        );
+      } else if (_homePageController.cmsHomePageModel.sections[index].type ==
+              "BannerComponent" ||
+          _homePageController.cmsHomePageModel.sections[index].type ==
+              "KTWBannerComponent") {
+        return ListTile(
+          leading: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
+          trailing: Icon(EvaIcons.activity),
+          subtitle: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].type}'),
+          title: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].section}'),
+        );
+      } else {
+        return ListTile(
+          leading: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].components.length ?? 0}'),
+          trailing: Icon(EvaIcons.activity),
+          subtitle: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].type}'),
+          title: Text(
+              '${_homePageController.cmsHomePageModel.sections[index].section}'),
+        );
+      }
+    });
   }
 }

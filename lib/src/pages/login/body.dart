@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:flutter_getx/src/pages/home/main.dart';
-import 'package:flutter_getx/src/pages/login/controller.dart';
 import 'package:get/get.dart';
 
 class LoginBody extends StatelessWidget {
@@ -102,7 +101,9 @@ class LoginBody extends StatelessWidget {
                           fontSize: 18),
                     )),
               ))
-            : SizedBox(height: 20,),
+            : SizedBox(
+                height: 20,
+              ),
         Container(
           child: SizedBox(
             height: 44,

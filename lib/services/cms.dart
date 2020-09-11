@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'dart:convert' as convert;
 import 'package:flutter_getx/models/cms.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/service_base.dart';
 import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:get/get.dart';

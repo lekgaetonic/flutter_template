@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/service_base.dart';
 import 'dart:convert' as convert;
-import 'package:http/http.dart' as http;
 import 'package:http/io_client.dart';
 
 class AuthenService extends ServiceBase {

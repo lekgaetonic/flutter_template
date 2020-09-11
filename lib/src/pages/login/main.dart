@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/src/pages/login/appbar.dart';
 import 'package:flutter_getx/src/pages/login/body.dart';
-import 'package:line_icons/line_icons.dart';
 
 class LoginPage extends StatelessWidget {
   @override
