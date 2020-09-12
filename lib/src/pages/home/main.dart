@@ -32,6 +32,7 @@ class HomePage extends StatelessWidget {
     if (data != null) {
       return List.generate(data.length, (index) {
         if (data[index].type == "RotatingImagesComponent") {
+          for ()
           return SizedBox(
             height: 150.0,
             // width: 300.0,
