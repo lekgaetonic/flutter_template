@@ -6,4 +6,5 @@ const Map<String, String> en_US = {
   'register': 'Register',
   'search': 'Search',
   'loginlater': 'Login Later',
+  'viewmore':'View More'
 };

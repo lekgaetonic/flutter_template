@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
+import 'package:flutter_getx/src/widgets/shared/headersection.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,11 +19,16 @@ class HomePage extends StatelessWidget {
         preferredSize: Size.fromHeight(56.0), // here the desired height
         child: SharedAppBar(),
       ),
-      body: Obx(
-        () => Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children:
-              buildListWidget(_homePageController.cmsHomePageModel.sections),
+      body: SingleChildScrollView(
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children:
+                _homePageController.cmsHomePageModel.value.sections == null
+                    ? []
+                    : buildListWidget(
+                        _homePageController.cmsHomePageModel.value.sections),
+          ),
         ),
       ),
     );
@@ -28,11 +36,9 @@ class HomePage extends StatelessWidget {
 
   //https://stackoverflow.com/questions/56947046/flutter-for-loop-to-generate-list-of-widgets/56947190
   List<Widget> buildListWidget(data) {
-    print(data.length);
     if (data != null) {
       return List.generate(data.length, (index) {
         if (data[index].type == "RotatingImagesComponent") {
-          for ()
           return SizedBox(
             height: 150.0,
             // width: 300.0,
@@ -56,22 +62,60 @@ class HomePage extends StatelessWidget {
             ),
           );
         } else if (data[index].type == "SimpleBannerComponent") {
-          return ListTile(
-            leading: Text('${data[index].components.length ?? 0}'),
-            trailing: Icon(EvaIcons.activity),
-            subtitle: Text('${data[index].type}'),
-            title: Text('${data[index].section}'),
+          List<Card> listCard = List<Card>();
+          for (var name in data[index].components) {
+            listCard.add(Card(
+              color: Colors.white70,
+              child: Container(
+                width: 150.0,
+                height: 100.0,
+                child: Center(child: Text(name)),
+              ),
+            ));
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderSection(data[index].section),
+              Container(
+                  height: 100.0,
+                  child: ListView(
+                      scrollDirection: Axis.horizontal, children: listCard)),
+            ],
           );
         } else if (data[index].type == "BannerComponent" ||
-            _homePageController.cmsHomePageModel.sections[index].type ==
-                "KTWBannerComponent") {
-          return ListTile(
-            leading: Text('${data[index].components.length ?? 0}'),
-            trailing: Icon(EvaIcons.activity),
-            subtitle: Text('${data[index].type}'),
-            title: Text('${data[index].section}'),
+            data[index].type == "KTWBannerComponent") {
+          List<Card> listCard = List<Card>();
+          for (var name in data[index].components) {
+            listCard.add(Card(
+              color: Colors.white70,
+              child: Container(
+                width: 150.0,
+                height: 100.0,
+                child: Center(child: Text(name)),
+              ),
+            ));
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderSection(
+                data[index].section,
+                more: false,
+              ),
+              Container(
+                  height: 100.0,
+                  child: ListView(
+                      scrollDirection: Axis.horizontal, children: listCard)),
+            ],
           );
         } else {
+          print('--${data[index].type}--');
+          for (var name in data[index].components) {
+            print(name);
+          }
           return ListTile(
             leading: Text('${data[index].components.length ?? 0}'),
             trailing: Icon(EvaIcons.activity),

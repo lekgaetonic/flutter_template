@@ -6,4 +6,5 @@ const Map<String, String> th_TH = {
   'register': 'สมัครสมาชิก',
   'search': 'ค้นหา',
   'loginlater': 'เข้าสู่ระบบภายหลัง',
+  'viewmore':'เพิ่มเติม'
 };

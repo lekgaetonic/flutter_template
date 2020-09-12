@@ -6,10 +6,10 @@ import 'package:get/state_manager.dart';
 class HomePageController extends GetxController {
   // AuthenModel authenModel;
   fetchHomePage() async {
-    cmsHomePageModel = await CmsService().getHomePage();
+    cmsHomePageModel.value = await CmsService().getHomePage();
   }
 
-  CmsHomePageModel cmsHomePageModel = CmsHomePageModel();
+  var cmsHomePageModel = CmsHomePageModel().obs;
   // var error = "".obs;
   // var errorDescription = "".obs;
 
