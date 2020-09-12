@@ -3,8 +3,10 @@ import 'dart:ui';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
+import 'package:flutter_getx/src/widgets/shared/rotatecomponent.dart';
 import 'package:flutter_getx/src/widgets/shared/headersection.dart';
 import 'package:get/get.dart';
 
@@ -38,60 +40,21 @@ class HomePage extends StatelessWidget {
   List<Widget> buildListWidget(data) {
     if (data != null) {
       return List.generate(data.length, (index) {
+        final Sections section = data[index];
         if (data[index].type == "RotatingImagesComponent") {
-          return SizedBox(
-            height: 150.0,
-            // width: 300.0,
-            child: Carousel(
-              images: [
-                NetworkImage(
-                    'https://ktwdevapi.ktw.co.th/medias/sys_master/images/images/h8b/h1b/8845807026206/Happy-May-1900x650.jpg'),
-                NetworkImage(
-                    'https://ktwdevapi.ktw.co.th/medias/sys_master/images/images/h32/h4a/8845808205854/TOHO-1900x650s.jpg'),
-                NetworkImage(
-                    'https://ktwdevapi.ktw.co.th/medias/sys_master/images/images/h32/h4a/8845808205854/TOHO-1900x650s.jpg'),
-                NetworkImage(
-                    'https://shop.ktw.co.th/medias/sys_master/images/images/h65/hb9/9088749633566/5.-1900x650-3.jpg'),
-                // ExactAssetImage("assets/images/LaunchImage.jpg"),
-              ],
-              dotSize: 5.0,
-              indicatorBgPadding: 5.0,
-              dotBgColor: Colors.transparent,
-              dotColor: Colors.black38,
-              dotIncreasedColor: Colors.black54,
-            ),
-          );
+          return RotateComponent(section.section);
         } else if (data[index].type == "SimpleBannerComponent") {
-          List<Card> listCard = List<Card>();
-          for (var name in data[index].components) {
-            listCard.add(Card(
-              child: Container(
-                child: Image.network(
-                    'https://shop.ktw.co.th/medias/sys_master/images/images/h0d/hfa/9054011064350/-.png'),
-              ),
-            ));
-          }
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeaderSection(data[index].section),
-              Container(
-                height: 100.0,
-                child: ListView(
-                    scrollDirection: Axis.horizontal, children: listCard),
-              ),
-            ],
-          );
+          return SimpleBannerComponent(section);
         } else if (data[index].type == "BannerComponent") {
-          List<Card> listCard = List<Card>();
+          List<Container> listCard = List<Container>();
           for (var name in data[index].components) {
-            listCard.add(Card(
-              child: Container(
+            listCard.add(
+              Container(
+                padding: EdgeInsets.all(5),
                 child: Image.network(
                     'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
               ),
-            ));
+            );
           }
 
           return Column(
@@ -106,16 +69,16 @@ class HomePage extends StatelessWidget {
                       scrollDirection: Axis.horizontal, children: listCard)),
             ],
           );
-        }
-        else if (data[index].type == "KTWBannerComponent") {
-          List<Card> listCard = List<Card>();
+        } else if (data[index].type == "KTWBannerComponent") {
+          List<Container> listCard = List<Container>();
           for (var name in data[index].components) {
-            listCard.add(Card(
-              child: Container(
+            listCard.add(
+              Container(
+                padding: EdgeInsets.all(5),
                 child: Image.network(
                     'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
               ),
-            ));
+            );
           }
 
           return Column(
@@ -146,5 +109,35 @@ class HomePage extends StatelessWidget {
     } else {
       return List<Widget>();
     }
+  }
+}
+
+class SimpleBannerComponent extends StatelessWidget {
+  final Sections section;
+  const SimpleBannerComponent(this.section, {Key key});
+
+  @override
+  Widget build(BuildContext context) {
+    List<Container> listCard = List<Container>();
+    for (var name in section.components) {
+      listCard.add(
+        Container(
+          padding: EdgeInsets.all(5),
+          child: Image.network(
+              'https://shop.ktw.co.th/medias/sys_master/images/images/h0d/hfa/9054011064350/-.png'),
+        ),
+      );
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // HeaderSection(data[index].section),
+        Container(
+          height: 100.0,
+          child: ListView(scrollDirection: Axis.horizontal, children: listCard),
+        ),
+      ],
+    );
   }
 }

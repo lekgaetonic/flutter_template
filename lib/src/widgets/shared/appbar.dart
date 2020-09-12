@@ -68,11 +68,12 @@ class SharedAppBar extends StatelessWidget {
                     color: Colors.white,
                     size: 30,
                   ),
-                  onPressed: () => { 
+                  onPressed: () => {
                     print(_authenController.accessToken),
                     _authenController.fetchLogout(),
                     print(_authenController.accessToken),
-                    Get.to(LoginPage())},
+                    Get.to(LoginPage())
+                  },
                 )
               : Container();
         }),

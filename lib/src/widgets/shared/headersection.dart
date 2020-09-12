@@ -12,8 +12,8 @@ class HeaderSection extends StatelessWidget {
     return Row(
       children: [
         Container(
-          padding: EdgeInsets.all(5),
-          width: Get.width / 2,
+          padding: EdgeInsets.fromLTRB(10, 15, 0, 0),
+          width: Get.width - 70,
           child: Text(
             title,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -21,16 +21,19 @@ class HeaderSection extends StatelessWidget {
         ),
         more
             ? Container(
-                alignment: Alignment(1.0, 0.0),
-                padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-                width: 100,
-                child: FlatButton(
-                  onPressed: () {
+                padding: EdgeInsets.fromLTRB(0, 18, 10, 0),
+                width: 70,
+                child: InkWell(
+                  onTap: () {
                     goto == '' ? Get.toNamed(goto) : '';
                   },
                   child: Text(
                     '${'viewmore'.tr} >>',
-                    style: TextStyle(fontSize: 14, color: Colors.indigo),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.indigo,
+                      decoration: TextDecoration.underline,
+                    ),
                     textAlign: TextAlign.right,
                   ),
                 ),
