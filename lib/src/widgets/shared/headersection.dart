@@ -4,11 +4,8 @@ import 'package:get/get.dart';
 class HeaderSection extends StatelessWidget {
   final String title;
   final bool more;
-  const HeaderSection(
-    this.title, {
-    Key key,
-    this.more: true,
-  });
+  final String goto;
+  const HeaderSection(this.title, {Key key, this.more: true, this.goto});
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +19,23 @@ class HeaderSection extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
         ),
-        more ? Container(
-          padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
-          width: Get.width / 2,
-          child: Text(
-            '${'viewmore'.tr} >>',
-            style: TextStyle(fontSize: 14, color: Colors.indigo),
-            textAlign: TextAlign.right,
-          ),
-        ) : Container(),
+        more
+            ? Container(
+                alignment: Alignment(1.0, 0.0),
+                padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                width: 100,
+                child: FlatButton(
+                  onPressed: () {
+                    goto == '' ? Get.toNamed(goto) : '';
+                  },
+                  child: Text(
+                    '${'viewmore'.tr} >>',
+                    style: TextStyle(fontSize: 14, color: Colors.indigo),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              )
+            : Container(),
       ],
     );
   }

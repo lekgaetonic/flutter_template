@@ -65,11 +65,9 @@ class HomePage extends StatelessWidget {
           List<Card> listCard = List<Card>();
           for (var name in data[index].components) {
             listCard.add(Card(
-              color: Colors.white70,
               child: Container(
-                width: 150.0,
-                height: 100.0,
-                child: Center(child: Text(name)),
+                child: Image.network(
+                    'https://shop.ktw.co.th/medias/sys_master/images/images/h0d/hfa/9054011064350/-.png'),
               ),
             ));
           }
@@ -79,21 +77,19 @@ class HomePage extends StatelessWidget {
             children: [
               HeaderSection(data[index].section),
               Container(
-                  height: 100.0,
-                  child: ListView(
-                      scrollDirection: Axis.horizontal, children: listCard)),
+                height: 100.0,
+                child: ListView(
+                    scrollDirection: Axis.horizontal, children: listCard),
+              ),
             ],
           );
-        } else if (data[index].type == "BannerComponent" ||
-            data[index].type == "KTWBannerComponent") {
+        } else if (data[index].type == "BannerComponent") {
           List<Card> listCard = List<Card>();
           for (var name in data[index].components) {
             listCard.add(Card(
-              color: Colors.white70,
               child: Container(
-                width: 150.0,
-                height: 100.0,
-                child: Center(child: Text(name)),
+                child: Image.network(
+                    'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
               ),
             ));
           }
@@ -103,7 +99,30 @@ class HomePage extends StatelessWidget {
             children: [
               HeaderSection(
                 data[index].section,
-                more: false,
+              ),
+              Container(
+                  height: 100.0,
+                  child: ListView(
+                      scrollDirection: Axis.horizontal, children: listCard)),
+            ],
+          );
+        }
+        else if (data[index].type == "KTWBannerComponent") {
+          List<Card> listCard = List<Card>();
+          for (var name in data[index].components) {
+            listCard.add(Card(
+              child: Container(
+                child: Image.network(
+                    'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
+              ),
+            ));
+          }
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderSection(
+                data[index].section,
               ),
               Container(
                   height: 100.0,
