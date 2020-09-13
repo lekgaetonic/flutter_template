@@ -16,6 +16,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _homePageController.fetchHomePage();
+    _homePageController.fetchbannerComponent();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0), // here the desired height
@@ -42,7 +43,7 @@ class HomePage extends StatelessWidget {
       return List.generate(data.length, (index) {
         final Sections section = data[index];
         if (data[index].type == "RotatingImagesComponent") {
-          return RotateComponent(section.section);
+          return RotateComponent(section.components[0]);
         } else if (data[index].type == "SimpleBannerComponent") {
           return SimpleBannerComponent(section);
         } else if (data[index].type == "BannerComponent") {

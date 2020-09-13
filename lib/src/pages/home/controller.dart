@@ -1,3 +1,4 @@
+import 'package:flutter_getx/models/bannercomponent.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/models/rotatecomponent.dart';
 import 'package:flutter_getx/services/cms.dart';
@@ -14,5 +15,11 @@ class HomePageController extends GetxController {
   fetchRotateComponent(String componentId) async {
     rotateComponentModel.value =
         await CmsService().getRotateComponent(componentId);
+  }
+
+  var bannerComponentModel = BannerComponentModel().obs;
+  fetchbannerComponent() async {
+    // bannerComponentModel.value = await CmsService().getBannerComponent();
+    await CmsService().getBannerComponent();
   }
 }
