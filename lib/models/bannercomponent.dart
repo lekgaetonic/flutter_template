@@ -1,61 +1,59 @@
-import 'dart:convert';
-
-BannerComponentModel bannerComponentModelFromJson(String str) =>
-    BannerComponentModel.fromJson(json.decode(str));
-
-String bannerComponentModelToJson(BannerComponentModel data) =>
-    json.encode(data.toJson());
-
 class BannerComponentModel {
-  BannerComponentModel({
-    this.effect,
-    this.restricted,
-    this.rotates,
-  });
+  List<Banners> banners;
 
-  String effect;
-  bool restricted;
-  List<Rotate> rotates;
+  BannerComponentModel({this.banners});
 
-  factory BannerComponentModel.fromJson(Map<String, dynamic> json) =>
-      BannerComponentModel(
-        effect: json["effect"],
-        restricted: json["restricted"],
-        rotates:
-            List<Rotate>.from(json["rotates"].map((x) => Rotate.fromJson(x))),
-      );
+  BannerComponentModel.fromJson(Map<String, dynamic> json) {
+    if (json['banners'] != null) {
+      banners = new List<Banners>();
+      json['banners'].forEach((v) {
+        banners.add(new Banners.fromJson(v));
+      });
+    }
+  }
 
-  Map<String, dynamic> toJson() => {
-        "effect": effect,
-        "restricted": restricted,
-        "rotates": List<dynamic>.from(rotates.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this.banners != null) {
+      data['banners'] = this.banners.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
-class Rotate {
-  Rotate({
-    this.link,
-    this.name,
-    this.uid,
-    this.url,
-  });
-
+class Banners {
+  String content;
+  String headline;
   String link;
-  String name;
+  String mediaUrl;
+  int subordinate;
   String uid;
-  String url;
 
-  factory Rotate.fromJson(Map<String, dynamic> json) => Rotate(
-        link: json["link"],
-        name: json["name"],
-        uid: json["uid"],
-        url: json["url"],
-      );
+  Banners(
+      {this.content,
+      this.headline,
+      this.link,
+      this.mediaUrl,
+      this.subordinate,
+      this.uid});
 
-  Map<String, dynamic> toJson() => {
-        "link": link,
-        "name": name,
-        "uid": uid,
-        "url": url,
-      };
+  Banners.fromJson(Map<String, dynamic> json) {
+    content = json['content'];
+    headline = json['headline'];
+    link = json['link'];
+    mediaUrl = json['media_url'];
+    subordinate = json['subordinate'];
+    uid = json['uid'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['content'] = this.content;
+    data['headline'] = this.headline;
+    data['link'] = this.link;
+    data['media_url'] = this.mediaUrl;
+    data['subordinate'] = this.subordinate;
+    data['uid'] = this.uid;
+    return data;
+  }
 }
