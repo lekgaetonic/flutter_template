@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:convert' as convert;
+import 'package:dio/dio.dart';
 import 'package:flutter_getx/models/bannercomponent.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/models/rotatecomponent.dart';
@@ -57,30 +58,20 @@ class CmsService extends ServiceBase {
   }
 
   Future<BannerComponentModel> getBannerComponent() async {
-    var data =
-        "component=Information1BannerComponent&component=Information2BannerComponent&component=Information3BannerComponent";
     // }
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final http = new IOClient(ioc);
-    var response = await http.post('$endpoint$bannercomponentpath',
-        headers: {
-          'authorization': 'Bearer ${_authenController.accessToken.value}',
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-          "Accept": "application/json",
-        },
-        body: jsonEncode(<String, dynamic>{
-          'title': [
-            'Information1BannerComponent',
-            'Information2BannerComponent',
-            'Information3BannerComponent'
-          ],
-        }));
+    var response = await http.post('$endpoint$bannercomponentpath', headers: {
+      'authorization': 'Bearer ${_authenController.accessToken.value}',
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+    }, body: {
+      'component': 'Information1BannerComponent',
+    });
 
     var jsonResponse = convert.jsonDecode(response.body);
     BannerComponentModel model = BannerComponentModel.fromJson(jsonResponse);
-    print(jsonResponse);
     return model;
   }
 }
