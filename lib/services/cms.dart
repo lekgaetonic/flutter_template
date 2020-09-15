@@ -61,50 +61,24 @@ class CmsService extends ServiceBase {
     if (componentId == '') {
       componentId = 'Information1BannerComponent';
     }
+
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final http = new IOClient(ioc);
-    var response = await http.post('$endpoint$bannercomponentpath', headers: {
-      'authorization': 'Bearer ${_authenController.accessToken.value}',
-      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-    }, body: {
-      'component': componentId,
-    });
-    //var jsonResponse = convert.jsonDecode(response.body);
-    var responsebody = {
-      "banners": [
-        {
-          "content": "",
-          "headline": "",
-          "link": "topic/information-1",
-          "media_url":
-              "/medias/sys_master/images/images/had/hcf/8844230328350/warranty.jpg",
-          "subordinate": 0,
-          "uid": "Information1BannerComponent"
-        },
-        {
-          "content": "",
-          "headline": "",
-          "link": "topic/information-2",
-          "media_url":
-              "/medias/sys_master/images/images/h9a/h9e/8844230459422/Shipping.jpg",
-          "subordinate": 0,
-          "uid": "Information2BannerComponent"
-        },
-        {
-          "content": "",
-          "headline": "",
-          "link": "topic/information-3",
-          "media_url":
-              "/medias/sys_master/images/images/h92/h56/8844230426654/payment.jpg",
-          "subordinate": 0,
-          "uid": "Information3BannerComponent"
-        }
-      ]
-    };
+    var response = await http.post(
+      '$endpoint$bannercomponentpath',
+      headers: {
+        'authorization': 'Bearer ${_authenController.accessToken.value}',
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        // 'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: {'component': componentId},
+    );
 
-    BannerComponentModel model = BannerComponentModel.fromJson(responsebody);
+    var jsonResponse = convert.jsonDecode(response.body);
+
+    BannerComponentModel model = BannerComponentModel.fromJson(jsonResponse);
     return model;
   }
 }
