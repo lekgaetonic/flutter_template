@@ -77,8 +77,6 @@ class CmsService extends ServiceBase {
     );
 
     var jsonResponse = convert.jsonDecode(response.body);
-
-    BannerComponentModel model = BannerComponentModel.fromJson(jsonResponse);
-    return model;
+    return BannerComponentModel.fromJson(jsonResponse);
   }
 }

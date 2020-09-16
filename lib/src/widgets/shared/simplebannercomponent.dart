@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/models/bannercomponent.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
+import 'package:flutter_getx/src/widgets/shared/headersection.dart';
 import 'package:get/get.dart';
 
 import 'loadingwidget.dart';
@@ -10,17 +12,27 @@ class SimpleBannerComponent extends StatelessWidget {
   SimpleBannerComponent(this.section, {Key key});
   HomePageController _homePageController = Get.put(HomePageController());
 
+  var _bannerComponentModel = BannerComponentModel().obs;
+
   @override
   Widget build(BuildContext context) {
-    for (var name in section.components) {
-      print(name);
-      _homePageController.fetchbannerComponent(name);
+    String bannerName = "";
+    section.components.forEach((e) => bannerName += e + ",");
+    if (section.type == "SimpleBannerComponent") {
+      bannerName = '';
     }
-
-    return Obx(
-        () => _homePageController.bannerComponentModel.value.banners == null
-            ? LoadingWidget()
-            : Column(
+    _homePageController
+        .fetchbannerComponent(bannerName)
+        .then((value) => _bannerComponentModel.value = value);
+    return Obx(() => _bannerComponentModel.value.banners == null
+        ? LoadingWidget()
+        : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderSection(
+                section.section,
+              ),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
@@ -28,19 +40,20 @@ class SimpleBannerComponent extends StatelessWidget {
                       //child: ListView(scrollDirection: Axis.horizontal, children: listCard),
                       child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: _homePageController
-                              .bannerComponentModel.value.banners.length,
+                          itemCount: _bannerComponentModel.value.banners.length,
                           itemBuilder: (BuildContext ctxt, int index) {
                             return Container(
                               padding: EdgeInsets.all(5),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
-                                    'https://ktwdevapi.ktw.co.th${_homePageController.bannerComponentModel.value.banners[index].mediaUrl}'),
+                                    'https://ktwdevapi.ktw.co.th${_bannerComponentModel.value.banners[index].mediaUrl}'),
                               ),
                             );
                           })),
                 ],
-              ));
+              ),
+            ],
+          ));
   }
 }

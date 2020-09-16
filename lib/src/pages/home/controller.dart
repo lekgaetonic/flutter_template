@@ -17,9 +17,13 @@ class HomePageController extends GetxController {
         await CmsService().getRotateComponent(componentId);
   }
 
-  var bannerComponentModel = BannerComponentModel().obs;
-  fetchbannerComponent(String componentId) async {
-    bannerComponentModel.value = await CmsService().getBannerComponent(
-        'Information1BannerComponent, Information2BannerComponent,Information3BannerComponent');
+  Future<BannerComponentModel> fetchbannerComponent(String componentId) async {
+    return await CmsService().getBannerComponent(componentId);
   }
+
+  // var ktwMediaBannerComponentModel = BannerComponentModel().obs;
+  // fetchKtwMediaBannerComponent(String componentId) async {
+  //   ktwMediaBannerComponentModel.value =
+  //       await CmsService().getBannerComponent(componentId);
+  // }
 }

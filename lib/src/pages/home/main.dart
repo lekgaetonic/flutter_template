@@ -43,34 +43,35 @@ class HomePage extends StatelessWidget {
     if (data != null) {
       return List.generate(data.length, (index) {
         final Sections section = data[index];
-        if (data[index].type == "RotatingImagesComponent") {
+        if (section.type == "RotatingImagesComponent") {
           return RotateComponent(section.components[0]);
-        } else if (data[index].type == "SimpleBannerComponent") {
+        } else if (section.type == "SimpleBannerComponent") {
           return SimpleBannerComponent(section);
-        } else if (data[index].type == "BannerComponent") {
-          List<Container> listCard = List<Container>();
-          for (var name in data[index].components) {
-            listCard.add(
-              Container(
-                padding: EdgeInsets.all(5),
-                child: Image.network(
-                    'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
-              ),
-            );
-          }
+        } else if (section.type == "BannerComponent") {
+          return SimpleBannerComponent(section);
+          // List<Container> listCard = List<Container>();
+          // for (var name in data[index].components) {
+          //   listCard.add(
+          //     Container(
+          //       padding: EdgeInsets.all(5),
+          //       child: Image.network(
+          //           'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
+          //     ),
+          //   );
+          // }
 
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeaderSection(
-                data[index].section,
-              ),
-              Container(
-                  height: 100.0,
-                  child: ListView(
-                      scrollDirection: Axis.horizontal, children: listCard)),
-            ],
-          );
+          // return Column(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     HeaderSection(
+          //       data[index].section,
+          //     ),
+          //     Container(
+          //         height: 100.0,
+          //         child: ListView(
+          //             scrollDirection: Axis.horizontal, children: listCard)),
+          //   ],
+          // );
         } else if (data[index].type == "KTWBannerComponent") {
           List<Container> listCard = List<Container>();
           for (var name in data[index].components) {
