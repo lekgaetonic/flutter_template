@@ -8,6 +8,7 @@ import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
 import 'package:flutter_getx/src/widgets/shared/rotatecomponent.dart';
 import 'package:flutter_getx/src/widgets/shared/headersection.dart';
+import 'package:flutter_getx/src/widgets/shared/simplebannercomponent.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
@@ -16,7 +17,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _homePageController.fetchHomePage();
-    _homePageController.fetchbannerComponent();
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0), // here the desired height
@@ -110,35 +111,5 @@ class HomePage extends StatelessWidget {
     } else {
       return List<Widget>();
     }
-  }
-}
-
-class SimpleBannerComponent extends StatelessWidget {
-  final Sections section;
-  const SimpleBannerComponent(this.section, {Key key});
-
-  @override
-  Widget build(BuildContext context) {
-    List<Container> listCard = List<Container>();
-    for (var name in section.components) {
-      listCard.add(
-        Container(
-          padding: EdgeInsets.all(5),
-          child: Image.network(
-              'https://shop.ktw.co.th/medias/sys_master/images/images/h0d/hfa/9054011064350/-.png'),
-        ),
-      );
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // HeaderSection(data[index].section),
-        Container(
-          height: 100.0,
-          child: ListView(scrollDirection: Axis.horizontal, children: listCard),
-        ),
-      ],
-    );
   }
 }
