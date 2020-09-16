@@ -4,6 +4,8 @@ import 'package:flutter_getx/models/bannercomponent.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:get/get.dart';
 
+import 'loadingwidget.dart';
+
 class RotateComponent extends StatelessWidget {
   final HomePageController _homePageController = Get.put(HomePageController());
 
@@ -19,11 +21,7 @@ class RotateComponent extends StatelessWidget {
         height: 150.0,
         // width: 300.0,
         child: _homePageController.rotateComponentModel.value.rotates == null
-            ? Container(
-                child: Image(
-                  image: AssetImage('assets/images/loading.gif'),
-                ),
-              )
+            ? LoadingWidget()
             : Carousel(
                 images: [
                   for (var image

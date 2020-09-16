@@ -71,7 +71,7 @@ class CmsService extends ServiceBase {
     }, body: {
       'component': componentId,
     });
-    //var jsonResponse = convert.jsonDecode(response.body);
+    var jsonResponse = convert.jsonDecode(response.body);
     var responsebody = {
       "banners": [
         {
@@ -104,7 +104,7 @@ class CmsService extends ServiceBase {
       ]
     };
 
-    BannerComponentModel model = BannerComponentModel.fromJson(responsebody);
+    BannerComponentModel model = BannerComponentModel.fromJson(jsonResponse);
     return model;
   }
 }
