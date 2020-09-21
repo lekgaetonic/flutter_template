@@ -18,7 +18,7 @@ class RotateComponent extends StatelessWidget {
 
     return Obx(
       () => SizedBox(
-        height: 150.0,
+        height: 140.0,
         // width: 300,
         child: _homePageController.rotateComponentModel.value.rotates == null
             ? LoadingWidget()

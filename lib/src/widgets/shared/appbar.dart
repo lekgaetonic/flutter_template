@@ -11,7 +11,7 @@ class SharedAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(_authenController.gruntType.value);
+    // print(_authenController.gruntType.value);
     return AppBar(
       leading: IconButton(
         icon: Icon(
@@ -69,9 +69,9 @@ class SharedAppBar extends StatelessWidget {
                     size: 30,
                   ),
                   onPressed: () => {
-                    print(_authenController.accessToken),
+                    // print(_authenController.accessToken),
                     _authenController.fetchLogout(),
-                    print(_authenController.accessToken),
+                    // print(_authenController.accessToken),
                     Get.to(LoginPage())
                   },
                 )

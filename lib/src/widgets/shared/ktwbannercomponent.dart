@@ -7,9 +7,9 @@ import 'package:get/get.dart';
 
 import 'loadingwidget.dart';
 
-class SimpleBannerComponent extends StatelessWidget {
+class KtwBannerComponent extends StatelessWidget {
   final Sections section;
-  SimpleBannerComponent(this.section, {Key key});
+  KtwBannerComponent(this.section, {Key key});
   HomePageController _homePageController = Get.put(HomePageController());
 
   var _bannerComponentModel = BannerComponentModel().obs;
@@ -39,6 +39,7 @@ class SimpleBannerComponent extends StatelessWidget {
                       height: 100.0,
                       //child: ListView(scrollDirection: Axis.horizontal, children: listCard),
                       child: ListView.builder(
+                          shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemCount: _bannerComponentModel.value.banners.length,
                           itemBuilder: (BuildContext ctxt, int index) {

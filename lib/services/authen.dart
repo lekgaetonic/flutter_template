@@ -22,14 +22,14 @@ class AuthenService extends ServiceBase {
     });
 
     var jsonResponse = convert.jsonDecode(response.body);
-    print(jsonResponse);
+    // print(jsonResponse);
     if (response.statusCode == 200) {
       _authenModel.accessToken = jsonResponse['access_token'];
       _authenModel.expiresIn = jsonResponse['expires_in'];
       _authenModel.gruntType = grantTypeClientCredentials;
       _authenModel.refreshToken = jsonResponse['refresh_token'];
     } else {
-      print(jsonResponse['error']);
+      // print(jsonResponse['error']);
       _authenModel.error = jsonResponse['error'];
       _authenModel.errorDescription = jsonResponse['error_description'];
     }
@@ -51,14 +51,14 @@ class AuthenService extends ServiceBase {
     });
 
     var jsonResponse = convert.jsonDecode(response.body);
-    print(jsonResponse);
+    // print(jsonResponse);
     if (response.statusCode == 200) {
       _authenModel.accessToken = jsonResponse['access_token'];
       _authenModel.expiresIn = jsonResponse['expires_in'];
       _authenModel.gruntType = grantTypePassword;
       _authenModel.refreshToken = jsonResponse['refresh_token'];
     } else {
-      print(jsonResponse['error']);
+      // print(jsonResponse['error']);
       _authenModel.error = jsonResponse['error'];
       _authenModel.errorDescription = jsonResponse['error_description'];
     }

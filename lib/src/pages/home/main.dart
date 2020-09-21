@@ -1,11 +1,12 @@
 import 'dart:ui';
-
+import 'dart:convert' as convert;
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
+import 'package:flutter_getx/src/widgets/shared/ktwbannercomponent.dart';
 import 'package:flutter_getx/src/widgets/shared/rotatecomponent.dart';
 import 'package:flutter_getx/src/widgets/shared/headersection.dart';
 import 'package:flutter_getx/src/widgets/shared/simplebannercomponent.dart';
@@ -49,64 +50,25 @@ class HomePage extends StatelessWidget {
           return SimpleBannerComponent(section);
         } else if (section.type == "BannerComponent") {
           return SimpleBannerComponent(section);
-          // List<Container> listCard = List<Container>();
-          // for (var name in data[index].components) {
-          //   listCard.add(
-          //     Container(
-          //       padding: EdgeInsets.all(5),
-          //       child: Image.network(
-          //           'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
-          //     ),
-          //   );
-          // }
-
-          // return Column(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   children: [
-          //     HeaderSection(
-          //       data[index].section,
-          //     ),
-          //     Container(
-          //         height: 100.0,
-          //         child: ListView(
-          //             scrollDirection: Axis.horizontal, children: listCard)),
-          //   ],
-          // );
-        } else if (data[index].type == "KTWBannerComponent") {
-          List<Container> listCard = List<Container>();
-          for (var name in data[index].components) {
-            listCard.add(
-              Container(
-                padding: EdgeInsets.all(5),
-                child: Image.network(
-                    'https://shop.ktw.co.th/medias/sys_master/images/images/hcd/ha1/9054013882398/-.png'),
-              ),
-            );
+        } else if (section.type == "KTWBannerComponent") {
+          print(section.section);
+          if (section.section == 'Section4Mobile') {
+            return Container();
+          } else {
+            return KtwBannerComponent(section);
           }
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeaderSection(
-                data[index].section,
-              ),
-              Container(
-                  height: 100.0,
-                  child: ListView(
-                      scrollDirection: Axis.horizontal, children: listCard)),
-            ],
-          );
         } else {
-          print('--${data[index].type}--');
-          for (var name in data[index].components) {
-            print(name);
-          }
-          return ListTile(
-            leading: Text('${data[index].components.length ?? 0}'),
-            trailing: Icon(EvaIcons.activity),
-            subtitle: Text('${data[index].type}'),
-            title: Text('${data[index].section}'),
-          );
+          // // print('--${data[index].type}--');
+          // for (var name in data[index].components) {
+          //   print(name);
+          // }
+          // return ListTile(
+          //   leading: Text('${data[index].components.length ?? 0}'),
+          //   trailing: Icon(EvaIcons.activity),
+          //   subtitle: Text('${data[index].type}'),
+          //   title: Text('${data[index].section}'),
+          // );
+          return Container();
         }
       });
     } else {
