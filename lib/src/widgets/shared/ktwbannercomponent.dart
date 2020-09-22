@@ -36,26 +36,28 @@ class KtwBannerComponent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      height: 100.0,
-                      //child: ListView(scrollDirection: Axis.horizontal, children: listCard),
-                      child: ListView.builder(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemCount: _bannerComponentModel.value.banners.length,
-                          itemBuilder: (BuildContext ctxt, int index) {
-                            return Container(
-                              padding: EdgeInsets.all(5),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: FadeInImage(
-                                  placeholder: NetworkImage(
-                                      'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
-                                  image: NetworkImage(
-                                      'https://ktwdevapi.ktw.co.th${_bannerComponentModel.value.banners[index].mediaUrl}'),
-                                ),
-                              ),
-                            );
-                          })),
+                    height: 100.0,
+                    //child: ListView(scrollDirection: Axis.horizontal, children: listCard),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _bannerComponentModel.value.banners.length,
+                      itemBuilder: (BuildContext ctxt, int index) {
+                        return Container(
+                          padding: EdgeInsets.all(5),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: FadeInImage(
+                              placeholder: NetworkImage(
+                                  'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
+                              image: NetworkImage(
+                                  'https://ktwdevapi.ktw.co.th${_bannerComponentModel.value.banners[index].mediaUrl}'),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ],

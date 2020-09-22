@@ -36,7 +36,7 @@ class SuggestionSearch extends StatelessWidget {
                       errorWidget: (context, url, error) =>
                           new Icon(Icons.error),
                     ),
-                    Text('${_searchSuggestionController.keyword} ${index}')
+                    Text('${_searchSuggestionController.keyword}')
                   ]),
                 );
               },

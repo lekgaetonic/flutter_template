@@ -1,16 +1,14 @@
 import 'dart:ui';
-import 'dart:convert' as convert;
-import 'package:carousel_pro/carousel_pro.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
-import 'package:flutter_getx/src/widgets/shared/ktwbannercomponent.dart';
+import 'package:flutter_getx/src/widgets/shared/gridbannercomponent.dart';
 import 'package:flutter_getx/src/widgets/shared/rotatecomponent.dart';
-import 'package:flutter_getx/src/widgets/shared/headersection.dart';
 import 'package:flutter_getx/src/widgets/shared/simplebannercomponent.dart';
 import 'package:get/get.dart';
+import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
   HomePageController _homePageController = Get.put(HomePageController());
@@ -36,6 +34,30 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+
+  Widget _buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      items: const <BottomNavigationBarItem>[
+        BottomNavigationBarItem(
+          icon: Icon(LineIcons.home),
+          label: 'Home',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(LineIcons.shopping_cart),
+          label: 'Cart',
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(LineIcons.share_alt),
+          label: 'Home',
+        ),
+      ],
+      // currentIndex: _selectedIndex,
+      selectedItemColor: AppColor().Primary,
+      unselectedItemColor: AppColor().Secondary,
+      // onTap: _onItemTapped,
     );
   }
 
@@ -51,23 +73,12 @@ class HomePage extends StatelessWidget {
         } else if (section.type == "BannerComponent") {
           return SimpleBannerComponent(section);
         } else if (section.type == "KTWBannerComponent") {
-          print(section.section);
           if (section.section == 'Section4Mobile') {
             return Container();
           } else {
-            return KtwBannerComponent(section);
+            return GridBannerComponent(section);
           }
         } else {
-          // // print('--${data[index].type}--');
-          // for (var name in data[index].components) {
-          //   print(name);
-          // }
-          // return ListTile(
-          //   leading: Text('${data[index].components.length ?? 0}'),
-          //   trailing: Icon(EvaIcons.activity),
-          //   subtitle: Text('${data[index].type}'),
-          //   title: Text('${data[index].section}'),
-          // );
           return Container();
         }
       });
