@@ -39,20 +39,31 @@ class GridBannerComponent extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: gridbannerimages(_bannerComponentModel.value.banners),
+                children: gridBannerImages(_bannerComponentModel.value.banners),
               ),
             ],
           ));
   }
 
-  List<Widget> gridbannerimages(banners) {
+  List<Widget> gridBannerImages(banners) {
     return [
       for (var banner in banners)
-        FadeInImage(
-          placeholder: NetworkImage(
-              'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
-          image: NetworkImage('https://ktwdevapi.ktw.co.th${banner.mediaUrl}'),
-        )
+        Column(
+          children: [
+            FadeInImage(
+              height: 100,
+              placeholder: NetworkImage(
+                  'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
+              image:
+                  NetworkImage('https://ktwdevapi.ktw.co.th${banner.mediaUrl}'),
+            ),
+            Text(
+              '${banner.headline}',
+              maxLines: 2,
+              softWrap: true,
+            ),
+          ],
+        ),
     ];
   }
 }

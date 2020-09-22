@@ -37,7 +37,6 @@ class KtwBannerComponent extends StatelessWidget {
                 children: [
                   Container(
                     height: 100.0,
-                    //child: ListView(scrollDirection: Axis.horizontal, children: listCard),
                     child: ListView.builder(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,

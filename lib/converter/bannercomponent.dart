@@ -1,7 +1,7 @@
 import 'package:flutter_getx/models/bannercomponent.dart';
 
 class BannerComponentConverter {
-  BannerComponentModel convert() {
+  BannerComponentModel convertMock() {
     var responsebody = {
       "banners": [
         {

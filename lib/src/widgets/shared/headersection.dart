@@ -32,7 +32,6 @@ class HeaderSection extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 12,
                       color: Colors.indigo,
-                      decoration: TextDecoration.underline,
                     ),
                     textAlign: TextAlign.right,
                   ),
