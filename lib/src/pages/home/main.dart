@@ -55,8 +55,8 @@ class HomePage extends StatelessWidget {
         ),
       ],
       // currentIndex: _selectedIndex,
-      selectedItemColor: AppColor().Primary,
-      unselectedItemColor: AppColor().Secondary,
+      selectedItemColor: AppColor().primary,
+      unselectedItemColor: AppColor().secondary,
       // onTap: _onItemTapped,
     );
   }

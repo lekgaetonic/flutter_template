@@ -1,4 +1,3 @@
-import 'package:flutter_getx/models/bannercomponent.dart';
 import 'package:flutter_getx/models/searchsuggestion.dart';
 
 class SearchSuggestionConverter {
