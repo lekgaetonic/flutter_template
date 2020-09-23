@@ -2,13 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/src/pages/search/appbar.dart';
 import 'package:flutter_getx/src/pages/search/controller.dart';
+import 'package:flutter_getx/src/widgets/search/body.dart';
 import 'package:get/get.dart';
 
 class SuggestionSearch extends StatelessWidget {
   final SearchSuggestionController _searchSuggestionController =
       Get.put(SearchSuggestionController());
-  final List<int> colorCodes = <int>[600, 500, 100];
-  final List<String> entries = <String>['A', 'B', 'C'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,20 +16,21 @@ class SuggestionSearch extends StatelessWidget {
         preferredSize: Size.fromHeight(56.0), // here the desired height
         child: SuggestionSearchAppBar(),
       ),
+      // body: SearchBody());
       body: SingleChildScrollView(
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Obx(
             () => _searchSuggestionController
-                            .searchSuggestionModel.value.product !=
+                            .searchSuggestionModel.value.products !=
                         null &&
                     _searchSuggestionController
-                            .searchSuggestionModel.value.product.length >
+                            .searchSuggestionModel.value.products.length >
                         0
                 ? ListView.separated(
                     padding: const EdgeInsets.all(8),
                     itemCount:
-                        "${_searchSuggestionController.searchSuggestionModel.value.product}"
+                        "${_searchSuggestionController.searchSuggestionModel.value.products}"
                             .length,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
@@ -44,15 +45,23 @@ class SuggestionSearch extends StatelessWidget {
                             errorWidget: (context, url, error) =>
                                 new Icon(Icons.error),
                           ),
-                          Text(
-                              '${_searchSuggestionController.searchSuggestionModel.value.product[index].code}')
+                          Column(
+                            children: [
+                              Text(
+                                  '${_searchSuggestionController.searchSuggestionModel.value.products[index].name}'),
+                              Text(
+                                  '${_searchSuggestionController.searchSuggestionModel.value.products[index].code}'),
+                            ],
+                          )
                         ]),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(),
                   )
-                : Container(),
+                : Center(
+                    child: Text('Please enter search keyword.'),
+                  ),
           ),
         ),
       ),

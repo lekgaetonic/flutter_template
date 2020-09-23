@@ -1,17 +1,17 @@
 class SearchSuggestionModel {
-  List<Brand> brand;
+  List<Brand> brands;
   List<Category> category;
-  List<Product> product;
-  List<String> suggestion;
+  List<Product> products;
+  List<String> suggestions;
 
   SearchSuggestionModel(
-      {this.brand, this.category, this.product, this.suggestion});
+      {this.brands, this.category, this.products, this.suggestions});
 
   SearchSuggestionModel.fromJson(Map<String, dynamic> json) {
     if (json['brand'] != null) {
-      brand = new List<Brand>();
+      brands = new List<Brand>();
       json['brand'].forEach((v) {
-        brand.add(new Brand.fromJson(v));
+        brands.add(new Brand.fromJson(v));
       });
     }
     if (json['category'] != null) {
@@ -21,32 +21,32 @@ class SearchSuggestionModel {
       });
     }
     if (json['product'] != null) {
-      product = new List<Product>();
+      products = new List<Product>();
       json['product'].forEach((v) {
-        product.add(new Product.fromJson(v));
+        products.add(new Product.fromJson(v));
       });
     }
     if (json['suggestion'] != null) {
-      suggestion = new List<Null>();
+      suggestions = new List<String>();
       json['suggestion'].forEach((v) {
-        suggestion.add(v);
+        suggestions.add(v);
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.brand != null) {
-      data['brand'] = this.brand.map((v) => v.toJson()).toList();
+    if (this.brands != null) {
+      data['brand'] = this.brands.map((v) => v.toJson()).toList();
     }
     if (this.category != null) {
       data['category'] = this.category.map((v) => v.toJson()).toList();
     }
-    if (this.product != null) {
-      data['product'] = this.product.map((v) => v.toJson()).toList();
+    if (this.products != null) {
+      data['product'] = this.products.map((v) => v.toJson()).toList();
     }
-    if (this.suggestion != null) {
-      data['suggestion'] = this.suggestion.map((v) => v).toList();
+    if (this.suggestions != null) {
+      data['suggestion'] = this.suggestions.map((v) => v).toList();
     }
     return data;
   }

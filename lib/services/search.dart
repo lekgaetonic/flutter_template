@@ -1,6 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_getx/models/searchsuggestion.dart';
 import 'package:flutter_getx/services/service_base.dart';
+import 'package:flutter_getx/src/authen/controller.dart';
+import 'package:get/get.dart';
 import 'dart:convert' as convert;
 import 'package:http/io_client.dart';
 
@@ -8,7 +11,7 @@ class SearchService extends ServiceBase {
   SearchService() : super();
 
   String _suggesionSearchPath = '/products/autocomplete';
-
+  final AuthenController _authenController = Get.find<AuthenController>();
   Future<SearchSuggestionModel> getSuggestion(String keyword) async {
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
@@ -16,9 +19,13 @@ class SearchService extends ServiceBase {
     final http = new IOClient(ioc);
 
     var response = await http.get(
-        '$endpoint$webroot$version$basesite$_suggesionSearchPath?term=$keyword');
+        '$endpoint$webroot$version$basesite$_suggesionSearchPath?term=$keyword',
+        headers: {
+          'authorization': 'Bearer ${_authenController.accessToken.value}',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        });
 
-    var jsonResponse = convert.jsonDecode(response.body);
+    var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
     // print(jsonResponse);
     if (response.statusCode == 200) {
       return SearchSuggestionModel.fromJson(jsonResponse);
