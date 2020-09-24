@@ -7,14 +7,11 @@ import 'package:get/get.dart';
 class SearchSuggestionController extends GetxController {
   var keyword = "".obs;
   var searchSuggestionModel = new SearchSuggestionModel().obs;
-  var temp = new SearchSuggestionModel();
   keywordChanged(text) async {
     if (text == "") {
       searchSuggestionModel.value = new SearchSuggestionModel();
     } else {
       searchSuggestionModel.value = await SearchService().getSuggestion(text);
     }
-
-    print(searchSuggestionModel.value.products.length);
   }
 }

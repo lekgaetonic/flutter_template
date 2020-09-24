@@ -14,9 +14,7 @@ class App extends StatelessWidget {
     final AuthenController _authenController = Get.put(AuthenController());
 
     if (_authenController.accessToken.value == "") {
-      Future.delayed(Duration(seconds: 2), () {
-        _authenController.fetchAuthen();
-      });
+      _authenController.fetchAuthen();
     }
 
     return GetMaterialApp(
