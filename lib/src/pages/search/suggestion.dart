@@ -18,7 +18,7 @@ class SuggestionSearch extends StatelessWidget {
       // body: SearchBody());
       body: SingleChildScrollView(
         child: SizedBox(
-          height: Get.height - MediaQuery.of(context).viewInsets.bottom,
+          height: (Get.height - 80) - MediaQuery.of(context).viewInsets.bottom,
           child: Obx(
             () => _searchSuggestionController
                             .searchSuggestionModel.value.products !=
@@ -31,6 +31,15 @@ class SuggestionSearch extends StatelessWidget {
                     itemCount: _searchSuggestionController
                         .searchSuggestionModel.value.products.length,
                     itemBuilder: (BuildContext context, int index) {
+                      var price =
+                          '${_searchSuggestionController.searchSuggestionModel.value.products[index].price}';
+                      Color priceColor =
+                          price == '0' ? Colors.grey : Colors.green;
+                      var stockStatus =
+                          '${_searchSuggestionController.searchSuggestionModel.value.products[index].stockstatus ?? 'lowStock'}';
+                      Color stockStatusColor = stockStatus == 'outOfStock'
+                          ? Colors.grey
+                          : Colors.green;
                       return Container(
                         height: 90,
                         // color: Colors.amber,
@@ -50,6 +59,7 @@ class SuggestionSearch extends StatelessWidget {
                             Expanded(
                               flex: 6,
                               child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(
                                     height: 40,
@@ -80,12 +90,18 @@ class SuggestionSearch extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '${_searchSuggestionController.searchSuggestionModel.value.products[index].price ?? '7,777.77'}',
+                                    '${_searchSuggestionController.searchSuggestionModel.value.products[index].price}',
                                     textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: priceColor,
+                                    ),
                                   ),
                                   Text(
-                                    '${_searchSuggestionController.searchSuggestionModel.value.products[index].stockstatus ?? 'lowStock'}',
+                                    stockStatus,
                                     textAlign: TextAlign.start,
+                                    style: TextStyle(
+                                      color: stockStatusColor,
+                                    ),
                                   ),
                                 ],
                               ),

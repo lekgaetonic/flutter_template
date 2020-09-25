@@ -107,7 +107,7 @@ class Product {
   String link;
   String manufacturers;
   String name;
-  int price;
+  String price;
   String stockstatus;
   String summary;
 
@@ -125,7 +125,7 @@ class Product {
     link = json['link'];
     manufacturers = json['manufacturers'];
     name = json['name'];
-    price = json['price'];
+    price = json['price'] != null ? json['price'].toString() : '-';
     stockstatus = json['stockstatus'];
     summary = json['summary'];
   }
