@@ -1,4 +1,3 @@
-import 'package:flutter_getx/converter/searchsuggestion.dart';
 import 'package:flutter_getx/models/searchsuggestion.dart';
 import 'package:flutter_getx/services/search.dart';
 import 'package:get/state_manager.dart';

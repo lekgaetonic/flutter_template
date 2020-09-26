@@ -9,19 +9,21 @@ class SearchBody extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return Obx(() =>
-        _searchSuggestionController.searchSuggestionModel.value.products != null
-            ? Column(
-                children: [
-                  for (var product in _searchSuggestionController
-                      .searchSuggestionModel.value.products)
-                    Text('${product.code}')
-                ],
-              )
-            : Container(
-                child: Center(
-                  child: Text('Please enter search keyword.'),
-                ),
-              ));
+    return Obx(
+      () => _searchSuggestionController.searchSuggestionModel.value.products !=
+              null
+          ? Column(
+              children: [
+                for (var product in _searchSuggestionController
+                    .searchSuggestionModel.value.products)
+                  Text('${product.code}')
+              ],
+            )
+          : Container(
+              child: Center(
+                child: Text('Please enter search keyword.'),
+              ),
+            ),
+    );
   }
 }

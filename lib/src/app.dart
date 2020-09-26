@@ -26,9 +26,17 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Sukhumvit',
-        primarySwatch: Colors.grey,
+        primarySwatch: Colors.blue,
         primaryColor: Color(0xFFF5821f),
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryTextTheme: TextTheme(
+          headline6: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
       ),
       home: SafeArea(
         child: Obx(() {

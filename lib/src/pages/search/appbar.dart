@@ -16,7 +16,7 @@ class SearchAppBar extends StatelessWidget {
         icon: Icon(
           LineIcons.angle_left,
           color: Colors.white,
-          size: 30,
+          size: 26,
         ),
         onPressed: () => {Get.back()},
       ),
@@ -42,8 +42,9 @@ class SearchAppBar extends StatelessWidget {
           hintStyle: TextStyle(color: Colors.white70),
           suffixIcon: IconButton(
               icon: Icon(
-                EvaIcons.search,
+                LineIcons.search,
                 color: Colors.white,
+                size: 20,
               ),
               onPressed: () => {}),
         ),
@@ -53,7 +54,7 @@ class SearchAppBar extends StatelessWidget {
             icon: Icon(
               LineIcons.microphone,
               color: Colors.white,
-              size: 30,
+              size: 28,
             ),
             onPressed: () => {}),
       ],

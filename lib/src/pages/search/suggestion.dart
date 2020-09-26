@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx/src/pages/search/searchappbar.dart';
+import 'package:flutter_getx/src/pages/search/appbar.dart';
 import 'package:flutter_getx/src/pages/search/searchbody.dart';
 
 class SuggestionSearch extends StatelessWidget {
