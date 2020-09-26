@@ -4,7 +4,7 @@ import 'package:flutter_getx/src/pages/search/controller.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
-class SuggestionSearchAppBar extends StatelessWidget {
+class SearchAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SearchSuggestionController _searchSuggestionController =

@@ -19,7 +19,7 @@ class SearchService extends ServiceBase {
     final http = new IOClient(ioc);
 
     var response = await http.get(
-        '$endpoint$webroot$version$basesite$_suggesionSearchPath?term=$keyword',
+        '$endpoint$webroot$version$basesite$_suggesionSearchPath?term=$keyword&max=30',
         headers: {
           'authorization': 'Bearer ${_authenController.accessToken.value}',
           'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',

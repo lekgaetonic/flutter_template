@@ -48,19 +48,25 @@ class GridBannerComponent extends StatelessWidget {
   List<Widget> gridBannerImages(banners) {
     return [
       for (var banner in banners)
-        Column(
+        Stack(
           children: [
             FadeInImage(
-              height: 100,
               placeholder: NetworkImage(
                   'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
               image:
                   NetworkImage('https://ktwdevapi.ktw.co.th${banner.mediaUrl}'),
             ),
-            Text(
-              '${banner.headline}',
-              maxLines: 2,
-              softWrap: true,
+            Container(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                '${banner.headline}',
+                maxLines: 2,
+                softWrap: true,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Colors.white54,
+                ),
+              ),
             ),
           ],
         ),
