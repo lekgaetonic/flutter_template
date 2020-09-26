@@ -24,24 +24,43 @@ class ProductPage extends StatelessWidget {
       ),
       //extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Center(
-              child: Container(
-                height: 200,
-                child: Obx(() => InteractiveViewer(
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            _productPageController.primaryImageModel.value.url,
-                        placeholder: (context, url) =>
-                            new CircularProgressIndicator(),
-                        errorWidget: (context, url, error) =>
-                            new Icon(Icons.error),
-                      ),
-                    )),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                productSummary,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+              Text(
+                productCode,
+                style: TextStyle(),
+                textAlign: TextAlign.start,
+              ),
+              Center(
+                child: Container(
+                  height: 200,
+                  child: Obx(() => InteractiveViewer(
+                        child: CachedNetworkImage(
+                          imageUrl: _productPageController
+                              .primaryImageModel.value.url,
+                          placeholder: (context, url) =>
+                              new CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              new Icon(Icons.error),
+                        ),
+                      )),
+                ),
+              ),
+              Column(
+                children: [],
+              )
+            ],
+          ),
         ),
       ),
     );
