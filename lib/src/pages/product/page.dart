@@ -29,6 +29,24 @@ class ProductPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Container(
+                  width: Get.width,
+                  child: Obx(() => ClipRRect(
+                        child: InteractiveViewer(
+                          child: CachedNetworkImage(
+                            imageUrl: _productPageController
+                                    .primaryImageModel.value.url ??
+                                missingImage,
+                            placeholder: (context, url) =>
+                                new CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                new Icon(Icons.error),
+                          ),
+                        ),
+                      )),
+                ),
+              ),
               Text(
                 productSummary,
                 textAlign: TextAlign.start,
@@ -40,22 +58,6 @@ class ProductPage extends StatelessWidget {
                 productCode,
                 style: TextStyle(),
                 textAlign: TextAlign.start,
-              ),
-              Center(
-                child: Container(
-                  height: 200,
-                  child: Obx(() => InteractiveViewer(
-                        child: CachedNetworkImage(
-                          imageUrl: _productPageController
-                                  .primaryImageModel.value.url ??
-                              missingImage,
-                          placeholder: (context, url) =>
-                              new CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              new Icon(Icons.error),
-                        ),
-                      )),
-                ),
               ),
               Column(
                 children: [],

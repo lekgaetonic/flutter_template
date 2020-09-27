@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/custom.dart';
 import 'package:flutter_getx/models/primaryimage.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_getx/src/pages/product/page.dart';
 import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_getx/src/pages/search/controller.dart';
+import 'package:intl/intl.dart';
 
 class SearchBody extends StatelessWidget {
   final SearchSuggestionController _searchSuggestionController =
@@ -40,6 +42,7 @@ class SearchBody extends StatelessWidget {
                         '${_searchSuggestionController.searchSuggestionModel.value.products[index].price}';
                     Color priceColor =
                         price == '0' ? Colors.grey : Colors.green;
+                    final formatter = NumberFormat("#,###.##");
                     var stockStatus =
                         '${_searchSuggestionController.searchSuggestionModel.value.products[index].stockstatus ?? 'lowStock'}';
                     Color stockStatusColor = stockStatus == 'outOfStock'
