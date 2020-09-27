@@ -5,11 +5,11 @@ import 'package:get/get.dart';
 
 import 'loadingwidget.dart';
 
-class RotateComponent extends StatelessWidget {
+class CarouselWidget extends StatelessWidget {
   final HomePageController _homePageController = Get.put(HomePageController());
 
   final String componentId;
-  RotateComponent(this.componentId, {Key key});
+  CarouselWidget(this.componentId, {Key key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class RotateComponent extends StatelessWidget {
 
     return Obx(
       () => SizedBox(
-        height: 140.0,
+        height: Get.width / 2.9,
         // width: 300,
         child: _homePageController.rotateComponentModel.value.rotates == null
             ? LoadingWidget()

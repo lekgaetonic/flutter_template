@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:flutter_getx/src/pages/search/suggestion.dart';
 import 'package:get/get.dart';
@@ -11,13 +12,12 @@ class SharedAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(_authenController.gruntType.value);
     return AppBar(
+      backgroundColor: AppColor().primary,
       leading: IconButton(
         icon: Icon(
           LineIcons.bars,
           color: Colors.white,
-          size: 30,
         ),
         onPressed: () => {},
       ),
@@ -32,7 +32,7 @@ class SharedAppBar extends StatelessWidget {
           icon: Icon(
             LineIcons.search,
             color: Colors.white,
-            size: 30,
+            // size: 30,
           ),
           onPressed: () => {Get.to(SuggestionSearch())},
         ),
@@ -42,7 +42,7 @@ class SharedAppBar extends StatelessWidget {
                   icon: Icon(
                     LineIcons.shopping_cart,
                     color: Colors.white,
-                    size: 34,
+                    // size: 34,
                   ),
                   onPressed: () => {},
                 )
@@ -54,7 +54,7 @@ class SharedAppBar extends StatelessWidget {
                   icon: Icon(
                     LineIcons.user,
                     color: Colors.white,
-                    size: 32,
+                    size: 28,
                   ),
                   onPressed: () => {Get.to(LoginPage())},
                 )
@@ -66,7 +66,7 @@ class SharedAppBar extends StatelessWidget {
                   icon: Icon(
                     LineIcons.sign_out,
                     color: Colors.white,
-                    size: 30,
+                    // size: 30,
                   ),
                   onPressed: () => {
                     // print(_authenController.accessToken),

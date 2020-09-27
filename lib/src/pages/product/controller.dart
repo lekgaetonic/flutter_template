@@ -5,6 +5,8 @@ import 'package:get/state_manager.dart';
 class ProductPageController extends GetxController {
   var primaryImageModel = new PrimaryImageModel().obs;
   var galleryImageModel = new GalleryImageModel().obs;
+  var firstImageModel = new PrimaryImageModel().obs;
+
   getPrimaryImage(productCode, imageSize) async {
     primaryImageModel.value =
         await ImageService().getPrimaryImage(productCode, imageSize);
@@ -13,5 +15,10 @@ class ProductPageController extends GetxController {
   getGalleryImage(productCode, imageSize) async {
     galleryImageModel.value =
         await ImageService().getGalleryImage(productCode, imageSize);
+  }
+
+  getFirstImage(productCode, imageSize) async {
+    firstImageModel.value =
+        await ImageService().getPrimaryImage(productCode, imageSize);
   }
 }

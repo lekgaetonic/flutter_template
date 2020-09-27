@@ -2,10 +2,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/models/cms.dart';
+import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
+import 'package:flutter_getx/src/pages/login/main.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
 import 'package:flutter_getx/src/widgets/shared/gridbannercomponent.dart';
-import 'package:flutter_getx/src/widgets/shared/rotatecomponent.dart';
+import 'package:flutter_getx/src/widgets/shared/carouselwidget.dart';
+import 'package:flutter_getx/src/widgets/shared/loadingwidget.dart';
 import 'package:flutter_getx/src/widgets/shared/simplebannercomponent.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -28,7 +31,7 @@ class HomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children:
                 _homePageController.cmsHomePageModel.value.sections == null
-                    ? []
+                    ? [LoadingWidget()]
                     : buildListWidget(
                         _homePageController.cmsHomePageModel.value.sections),
           ),
@@ -38,8 +41,42 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  final AuthenController _authenController = Get.find<AuthenController>();
   Widget _buildBottomNavigationBar() {
+    int _selectedIndex = 0;
     return BottomNavigationBar(
+      onTap: (int index) {
+        // _navigateToScreens(index);
+        _selectedIndex = index;
+        print(index);
+        switch (index) {
+          case 0:
+            {
+              // statements;
+            }
+            break;
+
+          case 1:
+            {
+              //statements;
+            }
+            break;
+          case 2:
+            {
+              Get.to(
+                LoginPage(),
+              );
+            }
+            break;
+
+          default:
+            {
+              //statements;
+            }
+            break;
+        }
+      },
+      backgroundColor: AppColor().secondary,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(LineIcons.home),
@@ -50,13 +87,13 @@ class HomePage extends StatelessWidget {
           label: 'Cart',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.share_alt),
-          label: 'Home',
+          icon: Icon(LineIcons.user),
+          label: 'Account',
         ),
       ],
       // currentIndex: _selectedIndex,
       selectedItemColor: AppColor().primary,
-      unselectedItemColor: AppColor().secondary,
+      unselectedItemColor: Colors.grey,
       // onTap: _onItemTapped,
     );
   }
@@ -67,7 +104,7 @@ class HomePage extends StatelessWidget {
       return List.generate(data.length, (index) {
         final Sections section = data[index];
         if (section.type == "RotatingImagesComponent") {
-          return RotateComponent(section.components[0]);
+          return CarouselWidget(section.components[0]);
         } else if (section.type == "SimpleBannerComponent") {
           return SimpleBannerComponent(section);
         } else if (section.type == "BannerComponent") {

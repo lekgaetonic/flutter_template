@@ -47,7 +47,8 @@ class ProductPage extends StatelessWidget {
                   child: Obx(() => InteractiveViewer(
                         child: CachedNetworkImage(
                           imageUrl: _productPageController
-                              .primaryImageModel.value.url,
+                                  .primaryImageModel.value.url ??
+                              missingImage,
                           placeholder: (context, url) =>
                               new CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>

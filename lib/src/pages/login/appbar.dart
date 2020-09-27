@@ -7,29 +7,29 @@ class LoginAppBar extends StatelessWidget {
     return AppBar(
       //backgroundColor: Colors.transparent,
       //elevation: 0,
-      leading: IconButton(
-        icon: Icon(
-          LineIcons.bars,
-          color: Colors.white,
-          size: 30,
-        ),
-        onPressed: () => {},
-      ),
+      // leading: IconButton(
+      //   icon: Icon(
+      //     LineIcons.bars,
+      //     color: Colors.white,
+      //     // size: 30,
+      //   ),
+      //   onPressed: () => {},
+      // ),
       title: Image(
         image: AssetImage(
           'assets/images/logo.png',
         ),
         height: 36,
       ),
-      actions: [
-        IconButton(
-            icon: Icon(
-              LineIcons.user,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () => {}),
-      ],
+      // actions: [
+      //   IconButton(
+      //       icon: Icon(
+      //         LineIcons.user,
+      //         color: Colors.white,
+      //         // size: 30,
+      //       ),
+      //       onPressed: () => {}),
+      // ],
     );
   }
 }

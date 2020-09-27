@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/custom.dart';
+import 'package:flutter_getx/models/primaryimage.dart';
 import 'package:flutter_getx/src/pages/product/controller.dart';
 import 'package:flutter_getx/src/pages/product/page.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class SearchBody extends StatelessWidget {
       Get.put(SearchSuggestionController());
   final ProductPageController _productPageController =
       Get.put(ProductPageController());
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -43,12 +45,11 @@ class SearchBody extends StatelessWidget {
                     Color stockStatusColor = stockStatus == 'outOfStock'
                         ? Colors.grey
                         : Colors.green;
-
-                    // _productPageController.getPrimaryImage(
-                    //     code, ImageSize.small);
-
+                    var image = new PrimaryImageModel().obs;
+                    _productPageController.getFirstImage(code, ImageSize.small);
+                    image.value = _productPageController.firstImageModel.value;
                     return Container(
-                      height: 90,
+                      height: 60,
                       // color: Colors.amber,
                       child: InkWell(
                         child: Row(
@@ -57,72 +58,106 @@ class SearchBody extends StatelessWidget {
                               flex: 2,
                               child: Padding(
                                 padding: EdgeInsets.only(right: 5),
-                                child: CachedNetworkImage(
-                                  imageUrl:
-                                      "https://ktw.co.th/content/images/thumbs/0474516_2065-200-%E0%B8%B1%E0%B9%89%E0%B8%A1%E0%B8%A1%E0%B8%B1%E0%B8%AA%E0%B8%99-3hp-200l_420.jpeg",
-                                  placeholder: (context, url) =>
-                                      new CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) =>
-                                      new Icon(Icons.error),
+                                child: Image(
+                                  image: NetworkImage(
+                                      image.value.url ?? missingImage),
                                 ),
                               ),
                             ),
                             Expanded(
-                              flex: 6,
+                              flex: 8,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(
-                                    height: 50,
-                                    child: Text(
-                                      summary,
-                                      textAlign: TextAlign.left,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                                  Text(
+                                    summary,
+                                    textAlign: TextAlign.left,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 8,
+                                        child: Text(
+                                          code,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                    ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          price,
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                              fontSize: 12, color: priceColor),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    code,
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                  Text(
-                                    brand,
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                    ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        flex: 7,
+                                        child: Text(
+                                          brand,
+                                          textAlign: TextAlign.start,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                          ),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Text(
+                                          stockStatus,
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              color: stockStatusColor),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Text(
-                                    price,
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      color: priceColor,
-                                    ),
-                                  ),
-                                  Text(
-                                    stockStatus,
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      color: stockStatusColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Expanded(
+                            //   flex: 2,
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.end,
+                            //     children: [
+                            //       Text(
+                            //         price,
+                            //         textAlign: TextAlign.left,
+                            //         style: TextStyle(
+                            //           color: priceColor,
+                            //         ),
+                            //       ),
+                            //       Text(
+                            //         stockStatus,
+                            //         textAlign: TextAlign.start,
+                            //         style: TextStyle(
+                            //           color: stockStatusColor,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                         onTap: () => {

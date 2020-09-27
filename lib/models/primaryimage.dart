@@ -12,8 +12,12 @@ class PrimaryImageModel {
     altText = json['altText'];
     format = json['format'];
     imageType = json['imageType'];
-    url = endpoint +
-        json['url'].toString().replaceFirst('ktwcommercewebservices/v2', '');
+    url = json['url'] == null
+        ? missingImage
+        : endpoint +
+            json['url']
+                .toString()
+                .replaceFirst('ktwcommercewebservices/v2', '');
   }
 
   Map<String, dynamic> toJson() {

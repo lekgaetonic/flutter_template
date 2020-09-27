@@ -1,5 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/src/pages/search/controller.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
@@ -16,7 +17,6 @@ class SearchAppBar extends StatelessWidget {
         icon: Icon(
           LineIcons.angle_left,
           color: Colors.white,
-          size: 26,
         ),
         onPressed: () => {Get.back()},
       ),
@@ -28,12 +28,12 @@ class SearchAppBar extends StatelessWidget {
           color: Colors.white,
         ),
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+          contentPadding: EdgeInsets.only(left: 10.0),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white10, width: 1.0),
+            borderSide: BorderSide(color: AppColor().primary, width: 1.0),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white10, width: 1.0),
+            borderSide: BorderSide(color: AppColor().primary, width: 1.0),
           ),
           filled: true,
           fillColor: Colors.white24,
@@ -41,12 +41,13 @@ class SearchAppBar extends StatelessWidget {
           hintText: 'search'.tr,
           hintStyle: TextStyle(color: Colors.white70),
           suffixIcon: IconButton(
-              icon: Icon(
-                LineIcons.search,
-                color: Colors.white,
-                size: 20,
-              ),
-              onPressed: () => {}),
+            icon: Icon(
+              LineIcons.search,
+              color: Colors.white,
+              size: 18,
+            ),
+            onPressed: () => {},
+          ),
         ),
       ),
       actions: [
@@ -54,7 +55,7 @@ class SearchAppBar extends StatelessWidget {
             icon: Icon(
               LineIcons.microphone,
               color: Colors.white,
-              size: 28,
+              size: 26,
             ),
             onPressed: () => {}),
       ],

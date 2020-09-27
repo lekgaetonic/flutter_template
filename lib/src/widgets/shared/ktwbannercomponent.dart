@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/constants/custom.dart';
 import 'package:flutter_getx/models/bannercomponent.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
@@ -47,10 +48,9 @@ class KtwBannerComponent extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: FadeInImage(
-                              placeholder: NetworkImage(
-                                  'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
-                              image: NetworkImage(
-                                  'https://ktwdevapi.ktw.co.th${_bannerComponentModel.value.banners[index].mediaUrl}'),
+                              placeholder: NetworkImage(missingImage),
+                              image: NetworkImage(endpoint +
+                                  '${_bannerComponentModel.value.banners[index].mediaUrl}'),
                             ),
                           ),
                         );

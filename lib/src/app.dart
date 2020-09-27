@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/locales/messages.dart';
 import 'package:flutter_getx/src/pages/shared/loadingpage.dart';
 import 'package:get/get.dart';
@@ -26,8 +27,8 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         fontFamily: 'Sukhumvit',
-        primarySwatch: Colors.blue,
-        primaryColor: Color(0xFFF5821f),
+        primarySwatch: Colors.grey,
+        primaryColor: AppColor().primary,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryTextTheme: TextTheme(
           headline6: TextStyle(
@@ -37,14 +38,15 @@ class App extends StatelessWidget {
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
+        appBarTheme: AppBarTheme(
+            color: AppColor().primary,
+            iconTheme: IconThemeData(color: Colors.white)),
       ),
-      home: SafeArea(
-        child: Obx(() {
-          return _authenController.accessToken.value == ""
-              ? LoadingPage()
-              : HomePage();
-        }),
-      ),
+      home: Obx(() {
+        return _authenController.accessToken.value == ""
+            ? LoadingPage()
+            : HomePage();
+      }),
     );
   }
 }
