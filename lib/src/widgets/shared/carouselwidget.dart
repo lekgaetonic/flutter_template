@@ -1,5 +1,6 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/constants/custom.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +26,7 @@ class CarouselWidget extends StatelessWidget {
                 images: [
                   for (var image
                       in _homePageController.rotateComponentModel.value.rotates)
-                    NetworkImage('https://ktwdevapi.ktw.co.th${image.url}'),
+                    NetworkImage(endpoint + '${image.url}'),
                 ],
                 dotSize: 5.0,
                 indicatorBgPadding: 5.0,

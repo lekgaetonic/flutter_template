@@ -24,24 +24,27 @@ class ImageService extends ServiceBase {
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final http = new IOClient(ioc);
+    try {
+      var response = await http.get(
+          '$endpoint$webroot$version$basesite$_productPath' +
+              '/' +
+              productCode +
+              _primaryPath +
+              '/' +
+              describeEnum(imageSize),
+          headers: {
+            'authorization': 'Bearer ${_authenController.accessToken.value}',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          });
 
-    var response = await http.get(
-        '$endpoint$webroot$version$basesite$_productPath' +
-            '/' +
-            productCode +
-            _primaryPath +
-            '/' +
-            describeEnum(imageSize),
-        headers: {
-          'authorization': 'Bearer ${_authenController.accessToken.value}',
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        });
-
-    var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
-    // print(jsonResponse);
-    if (response.statusCode == 200) {
-      return PrimaryImageModel.fromJson(jsonResponse);
-    } else {
+      var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
+      // print(jsonResponse);
+      if (response.statusCode == 200) {
+        return PrimaryImageModel.fromJson(jsonResponse);
+      } else {
+        return PrimaryImageModel();
+      }
+    } catch (Exception) {
       return PrimaryImageModel();
     }
   }
@@ -52,24 +55,27 @@ class ImageService extends ServiceBase {
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final http = new IOClient(ioc);
+    try {
+      var response = await http.get(
+          '$endpoint$webroot$version$basesite$_productPath' +
+              '/' +
+              productCode +
+              _galleryPath +
+              '/' +
+              imageSize.toString(),
+          headers: {
+            'authorization': 'Bearer ${_authenController.accessToken.value}',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          });
 
-    var response = await http.get(
-        '$endpoint$webroot$version$basesite$_productPath' +
-            '/' +
-            productCode +
-            _galleryPath +
-            '/' +
-            imageSize.toString(),
-        headers: {
-          'authorization': 'Bearer ${_authenController.accessToken.value}',
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        });
-
-    var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
-    // print(jsonResponse);
-    if (response.statusCode == 200) {
-      return GalleryImageModel.fromJson(jsonResponse);
-    } else {
+      var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
+      // print(jsonResponse);
+      if (response.statusCode == 200) {
+        return GalleryImageModel.fromJson(jsonResponse);
+      } else {
+        return GalleryImageModel();
+      }
+    } catch (Exception) {
       return GalleryImageModel();
     }
   }

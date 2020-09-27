@@ -16,9 +16,4 @@ class ProductPageController extends GetxController {
     galleryImageModel.value =
         await ImageService().getGalleryImage(productCode, imageSize);
   }
-
-  getFirstImage(productCode, imageSize) async {
-    firstImageModel.value =
-        await ImageService().getPrimaryImage(productCode, imageSize);
-  }
 }

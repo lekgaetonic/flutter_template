@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/custom.dart';
 import 'package:flutter_getx/src/pages/product/appbar.dart';
 import 'package:flutter_getx/src/pages/product/controller.dart';
+import 'package:flutter_getx/src/widgets/shared/loadingwidget.dart';
 import 'package:get/get.dart';
 
 class ProductPage extends StatelessWidget {
@@ -16,7 +18,7 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _productPageController.getPrimaryImage(productCode, ImageSize.big);
-
+    _productPageController.getGalleryImage(productCode, ImageSize.big);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0), // here the desired height
@@ -30,21 +32,53 @@ class ProductPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-                child: Container(
-                  width: Get.width,
-                  child: Obx(() => ClipRRect(
-                        child: InteractiveViewer(
-                          child: CachedNetworkImage(
-                            imageUrl: _productPageController
-                                    .primaryImageModel.value.url ??
-                                missingImage,
-                            placeholder: (context, url) =>
-                                new CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                new Icon(Icons.error),
+                child: Stack(
+                  children: [
+                    Container(
+                      width: Get.width,
+                      height: 50,
+                      child: Obx(
+                        () => _productPageController
+                                    .galleryImageModel.value.images !=
+                                null
+                            ? Center(
+                                child: Row(
+                                  children: [
+                                    for (var image in _productPageController
+                                        .galleryImageModel.value.images)
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border:
+                                                Border.all(color: Colors.grey)),
+                                        child: Image(
+                                          image: NetworkImage(image.url),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+                      ),
+                    ),
+                    Container(
+                      width: Get.width,
+                      child: Obx(
+                        () => ClipRRect(
+                          child: InteractiveViewer(
+                            child: CachedNetworkImage(
+                              imageUrl: _productPageController
+                                      .primaryImageModel.value.url ??
+                                  missingImage,
+                              placeholder: (context, url) =>
+                                  new CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  new Icon(Icons.error),
+                            ),
                           ),
                         ),
-                      )),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               Text(
@@ -61,7 +95,7 @@ class ProductPage extends StatelessWidget {
               ),
               Column(
                 children: [],
-              )
+              ),
             ],
           ),
         ),
