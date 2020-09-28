@@ -47,7 +47,7 @@ class SearchBody extends StatelessWidget {
                       stockStatus == 'outOfStock' ? Colors.grey : Colors.green;
                   var image = new PrimaryImageModel().obs;
                   _productPageController.getPrimaryImage(code, ImageSize.small);
-                  image.value = _productPageController.firstImageModel.value;
+                  image.value = _productPageController.primaryImageModel.value;
                   return Container(
                     height: 60,
                     // color: Colors.amber,

@@ -14,11 +14,12 @@ class ProductPage extends StatelessWidget {
 
   final ProductPageController _productPageController =
       Get.put(ProductPageController());
-
   @override
   Widget build(BuildContext context) {
     _productPageController.getPrimaryImage(productCode, ImageSize.big);
     _productPageController.getGalleryImage(productCode, ImageSize.big);
+    _productPageController.getProduct(productCode);
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0), // here the desired height
@@ -94,7 +95,35 @@ class ProductPage extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
               Column(
-                children: [],
+                children: [
+                  Obx(
+                    () => _productPageController.productModel.value != null
+                        ? Container(
+                            child: Text(_productPageController
+                                .productModel.value.madeIn
+                                .toString()),
+                          )
+                        : Container(),
+                  ),
+                  Obx(
+                    () => _productPageController.productModel.value != null
+                        ? Container(
+                            child: Text(_productPageController
+                                .productModel.value.manufacturer
+                                .toString()),
+                          )
+                        : Container(),
+                  ),
+                  Obx(
+                    () => _productPageController.productModel.value != null
+                        ? Container(
+                            child: Text(_productPageController
+                                .productModel.value.manufacturerAID
+                                .toString()),
+                          )
+                        : Container(),
+                  ),
+                ],
               ),
             ],
           ),
