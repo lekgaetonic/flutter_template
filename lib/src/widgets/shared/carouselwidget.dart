@@ -21,7 +21,7 @@ class CarouselWidget extends StatelessWidget {
         height: Get.width / 2.9,
         // width: 300,
         child: _homePageController.rotateComponentModel.value.rotates == null
-            ? LoadingWidget()
+            ? Container()
             : Carousel(
                 images: [
                   for (var image

@@ -26,7 +26,7 @@ class GridBannerComponent extends StatelessWidget {
         .fetchbannerComponent(bannerName)
         .then((value) => _bannerComponentModel.value = value);
     return Obx(() => _bannerComponentModel.value.banners == null
-        ? LoadingWidget()
+        ? Container()
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

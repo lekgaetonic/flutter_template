@@ -1,8 +1,10 @@
 import 'dart:ui';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/authen/controller.dart';
+import 'package:flutter_getx/src/pages/cart/page.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/pages/login/main.dart';
 import 'package:flutter_getx/src/widgets/shared/appbar.dart';
@@ -43,22 +45,28 @@ class HomePage extends StatelessWidget {
 
   final AuthenController _authenController = Get.find<AuthenController>();
   Widget _buildBottomNavigationBar() {
-    int _selectedIndex = 0;
+    int _currentIndex = 0;
     return BottomNavigationBar(
+      currentIndex: _currentIndex,
+      // showUnselectedLabels: false,
       onTap: (int index) {
         // _navigateToScreens(index);
-        _selectedIndex = index;
+        _currentIndex = index;
         print(index);
         switch (index) {
           case 0:
             {
-              // statements;
+              Get.to(
+                HomePage(),
+              );
             }
             break;
 
           case 1:
             {
-              //statements;
+              Get.to(
+                CartPage(),
+              );
             }
             break;
           case 2:
@@ -79,15 +87,18 @@ class HomePage extends StatelessWidget {
       backgroundColor: AppColor().secondary,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.home),
+          activeIcon: Icon(EvaIcons.home),
+          icon: Icon(EvaIcons.homeOutline),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.shopping_cart),
+          activeIcon: Icon(EvaIcons.shoppingCart),
+          icon: Icon(EvaIcons.shoppingCartOutline),
           label: 'Cart',
         ),
         BottomNavigationBarItem(
-          icon: Icon(LineIcons.user),
+          activeIcon: Icon(EvaIcons.person),
+          icon: Icon(EvaIcons.personOutline),
           label: 'Account',
         ),
       ],
