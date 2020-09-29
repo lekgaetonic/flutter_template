@@ -25,8 +25,8 @@ class AuthenController extends GetxController {
 
   fetchLogin(username, password) async {
     error.value = "";
-    errorDescription .value= "";
-    
+    errorDescription.value = "";
+
     authenModel = await AuthenService().getLoginAuthen(username, password);
     if (authenModel.error == "") {
       gruntType.value = authenModel.gruntType;
@@ -42,13 +42,33 @@ class AuthenController extends GetxController {
   }
 
   fetchLogout() async {
-
     username.value = "";
     password.value = "";
     error.value = "";
-    errorDescription .value= "";
+    errorDescription.value = "";
 
     fetchAuthen();
+  }
+
+  fetchRefreshToken() async {
+    if (refreshToken.value != null && refreshToken.value != "") {
+      error.value = "";
+      errorDescription.value = "";
+
+      authenModel = await AuthenService().refreshToken();
+      if (authenModel.error == "") {
+        gruntType.value = authenModel.gruntType;
+        accessToken.value = authenModel.accessToken;
+        refreshToken.value = authenModel.refreshToken;
+        expiresIn.value = authenModel.expiresIn;
+        print('expiresIn:${expiresIn.value}');
+      } else {
+        error.value = authenModel.error;
+        errorDescription.value = authenModel.errorDescription;
+        Get.snackbar("Login failed", authenModel.errorDescription,
+            icon: Icon(EvaIcons.alertCircleOutline));
+      }
+    }
   }
 
   usernameChanged(sUsername) {

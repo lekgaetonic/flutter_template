@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter_getx/models/authen.dart';
 import 'package:flutter_getx/services/service_base.dart';
+import 'package:flutter_getx/src/authen/controller.dart';
+import 'package:get/get.dart';
 import 'dart:convert' as convert;
 import 'package:http/io_client.dart';
 
@@ -48,6 +50,35 @@ class AuthenService extends ServiceBase {
       'grant_type': grantTypePassword,
       'username': username,
       'password': password
+    });
+
+    var jsonResponse = convert.jsonDecode(response.body);
+    // print(jsonResponse);
+    if (response.statusCode == 200) {
+      _authenModel.accessToken = jsonResponse['access_token'];
+      _authenModel.expiresIn = jsonResponse['expires_in'];
+      _authenModel.gruntType = grantTypePassword;
+      _authenModel.refreshToken = jsonResponse['refresh_token'];
+    } else {
+      // print(jsonResponse['error']);
+      _authenModel.error = jsonResponse['error'];
+      _authenModel.errorDescription = jsonResponse['error_description'];
+    }
+
+    return _authenModel;
+  }
+
+  final AuthenController _authenController = Get.find<AuthenController>();
+  Future<AuthenModel> refreshToken() async {
+    final ioc = new HttpClient();
+    ioc.badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+    final http = new IOClient(ioc);
+    var response = await http.post('$endpoint$path', body: {
+      'client_id': clientId,
+      'client_secret': clientSecret,
+      'grant_type': grantTypeRefeshToken,
+      'refresh_token': _authenController.refreshToken.value,
     });
 
     var jsonResponse = convert.jsonDecode(response.body);

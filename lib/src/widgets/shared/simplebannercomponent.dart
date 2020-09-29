@@ -46,9 +46,7 @@ class SimpleBannerComponent extends StatelessWidget {
                               padding: EdgeInsets.all(5),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: FadeInImage(
-                                  placeholder: NetworkImage(
-                                      'https://ktwdevapi.ktw.co.th/_ui/responsive/theme-lambda/images/missing_product_EN_300x300.jpg'),
+                                child: Image(
                                   image: NetworkImage(
                                       'https://ktwdevapi.ktw.co.th${_bannerComponentModel.value.banners[index].mediaUrl}'),
                                 ),

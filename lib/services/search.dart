@@ -25,9 +25,9 @@ class SearchService extends ServiceBase {
           'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
         });
 
-    var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
     // print(jsonResponse);
     if (response.statusCode == 200) {
+      var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
       return SearchSuggestionModel.fromJson(jsonResponse);
     } else {
       return SearchSuggestionModel();

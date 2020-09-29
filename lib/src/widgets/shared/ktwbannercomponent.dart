@@ -46,13 +46,11 @@ class KtwBannerComponent extends StatelessWidget {
                         return Container(
                           padding: EdgeInsets.all(5),
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: FadeInImage(
-                              placeholder: NetworkImage(missingImage),
-                              image: NetworkImage(endpoint +
-                                  '${_bannerComponentModel.value.banners[index].mediaUrl}'),
-                            ),
-                          ),
+                              borderRadius: BorderRadius.circular(8.0),
+                              child: Image(
+                                image: NetworkImage(endpoint +
+                                    '${_bannerComponentModel.value.banners[index].mediaUrl}'),
+                              )),
                         );
                       },
                     ),

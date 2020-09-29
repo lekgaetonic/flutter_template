@@ -8,4 +8,5 @@ class ServiceBase {
   final String clientSecret = 'secret';
   final String grantTypeClientCredentials = 'client_credentials';
   final String grantTypePassword = 'password';
+  final String grantTypeRefeshToken = 'refresh_token';
 }

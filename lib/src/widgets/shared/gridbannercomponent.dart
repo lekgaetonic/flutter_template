@@ -51,8 +51,7 @@ class GridBannerComponent extends StatelessWidget {
       for (var banner in banners)
         Stack(
           children: [
-            FadeInImage(
-              placeholder: NetworkImage(missingImage),
+            Image(
               image:
                   NetworkImage('https://ktwdevapi.ktw.co.th${banner.mediaUrl}'),
             ),

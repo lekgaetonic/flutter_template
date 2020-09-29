@@ -31,6 +31,7 @@ class SearchAppBar extends StatelessWidget {
           contentPadding: EdgeInsets.only(left: 10.0),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor().primary, width: 1.0),
+            // borderRadius: BorderRadius.all(Radius.circular(32)),
           ),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColor().primary, width: 1.0),

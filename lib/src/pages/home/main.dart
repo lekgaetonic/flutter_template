@@ -29,14 +29,13 @@ class HomePage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Obx(
-          () => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children:
-                _homePageController.cmsHomePageModel.value.sections == null
-                    ? [LoadingWidget()]
-                    : buildListWidget(
-                        _homePageController.cmsHomePageModel.value.sections),
-          ),
+          () => _homePageController.cmsHomePageModel.value.sections == null
+              ? Center(child: LoadingWidget())
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: buildListWidget(
+                      _homePageController.cmsHomePageModel.value.sections),
+                ),
         ),
       ),
       bottomNavigationBar: _buildBottomNavigationBar(),
