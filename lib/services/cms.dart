@@ -60,22 +60,26 @@ class CmsService extends ServiceBase {
       componentId =
           'Information1BannerComponent,Information2BannerComponent,Information3BannerComponent';
     }
-    final ioc = new HttpClient();
-    ioc.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => true;
-    final http = new IOClient(ioc);
-    var response = await http.post(
-      '$endpoint$bannercomponentpath',
-      headers: {
-        'authorization': 'Bearer ${_authenController.accessToken.value}',
-        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        // 'Content-Type': 'application/json; charset=UTF-8',
-        'Accept': 'application/json',
-      },
-      body: {'component': componentId},
-    );
+    try {
+      final ioc = new HttpClient();
+      ioc.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      final http = new IOClient(ioc);
+      var response = await http.post(
+        '$endpoint$bannercomponentpath',
+        headers: {
+          'authorization': 'Bearer ${_authenController.accessToken.value}',
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          // 'Content-Type': 'application/json; charset=UTF-8',
+          'Accept': 'application/json',
+        },
+        body: {'component': componentId},
+      );
 
-    var jsonResponse = convert.jsonDecode(response.body);
-    return BannerComponentModel.fromJson(jsonResponse);
+      var jsonResponse = convert.jsonDecode(response.body);
+      return BannerComponentModel.fromJson(jsonResponse);
+    } catch (error) {
+      return BannerComponentModel();
+    }
   }
 }

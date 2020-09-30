@@ -89,7 +89,6 @@ class AuthenService extends ServiceBase {
       _authenModel.gruntType = grantTypePassword;
       _authenModel.refreshToken = jsonResponse['refresh_token'];
     } else {
-      // print(jsonResponse['error']);
       _authenModel.error = jsonResponse['error'];
       _authenModel.errorDescription = jsonResponse['error_description'];
     }

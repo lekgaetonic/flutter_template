@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/theme.dart';
+import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/appbottombar.dart';
+import 'package:get/get.dart';
 
 class CartPage extends StatelessWidget {
+  final AuthenController _authenController = Get.put(AuthenController());
+
   @override
   Widget build(BuildContext context) {
+    _authenController.fetchRefreshToken();
     return Container(
       color: AppColor().primary,
       child: SafeArea(

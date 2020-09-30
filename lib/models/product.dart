@@ -399,7 +399,7 @@ class Price {
   int minQuantity;
   String priceType;
   double value;
-  int wasPrice;
+  double wasPrice;
 
   Price(
       {this.currencyIso,

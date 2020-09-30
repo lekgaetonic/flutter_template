@@ -28,7 +28,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
   eva_icons_flutter: ^2.0.1
-  get: ^3.8.0
+  get: ^3.12.1
   dio: ^3.0.10
   http: ^0.12.2
   line_icons: ^0.2.0
@@ -38,6 +38,7 @@ dependencies:
   flutter_launcher_icons: "^0.8.0"
   intl: ">=0.14.0"
   decimal: ^0.3.0
+  shared_preferences: ^0.5.12
 
 flutter_icons:
   android: "launcher_icon"

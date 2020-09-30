@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import 'authen/controller.dart';
 import 'pages/home/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class App extends StatelessWidget {
   // This widget is the root of your application.
@@ -13,10 +14,19 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthenController _authenController = Get.put(AuthenController());
-
-    if (_authenController.accessToken.value == "") {
-      _authenController.fetchAuthen();
-    }
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+    prefs.then((value) => {
+          _authenController.accessToken.value = value.getString("accessToken"),
+          _authenController.expiresIn.value = value.getInt("expiresIn"),
+          _authenController.gruntType.value = value.getString("gruntType"),
+          _authenController.refreshToken.value =
+              value.getString("refreshToken"),
+          if (_authenController.accessToken.value != "" &&
+              _authenController.refreshToken.value != "")
+            {_authenController.fetchRefreshToken()}
+          else if (_authenController.accessToken.value == "")
+            {_authenController.fetchAuthen()}
+        });
 
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/custom.dart';
+import 'package:flutter_getx/src/authen/controller.dart';
 import 'package:flutter_getx/src/pages/product/appbar.dart';
 import 'package:flutter_getx/src/pages/product/controller.dart';
 import 'package:flutter_getx/src/widgets/shared/loadingwidget.dart';
@@ -14,8 +15,11 @@ class ProductPage extends StatelessWidget {
 
   final ProductPageController _productPageController =
       Get.put(ProductPageController());
+  final AuthenController _authenController = Get.put(AuthenController());
   @override
   Widget build(BuildContext context) {
+    _authenController.fetchRefreshToken();
+
     _productPageController.getPrimaryImage(productCode, ImageSize.big);
     _productPageController.getGalleryImage(productCode, ImageSize.big);
     _productPageController.getProduct(productCode);
