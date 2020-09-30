@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class ProductModel {
   bool availableForPickup;
   double averageRating;
@@ -65,7 +67,7 @@ class ProductModel {
     // 	json['baseOptions'].forEach((v) { baseOptions.add(new Object().fromJson(v)); });
     // }
     if (json['bundleTemplates'] != null) {
-      bundleTemplates = new List<Null>();
+      bundleTemplates = new List<BundleTemplates>();
       json['bundleTemplates'].forEach((v) {
         bundleTemplates.add(new BundleTemplates.fromJson(v));
       });
@@ -89,8 +91,8 @@ class ProductModel {
         dataSheets.add(new DataSheets.fromJson(v));
       });
     }
-    description = json['description'];
-    ean = json['ean'];
+    description = json['description'] ?? "";
+    ean = json['ean'] ?? "";
     keywords = json['keywords'].cast<String>();
     ktwImportedCompany = json['ktwImportedCompany'] != null
         ? new KtwImportedCompany.fromJson(json['ktwImportedCompany'])
@@ -101,8 +103,8 @@ class ProductModel {
         ktwMediaFolder.add(new KtwMediaFolder.fromJson(v));
       });
     }
-    madeIn = json['madeIn'];
-    manufacturer = json['manufacturer'];
+    madeIn = json['madeIn'] ?? "";
+    manufacturer = json['manufacturer'] ?? "";
     manufacturerAID = json['manufacturerAID'];
     name = json['name'];
     numberOfReviews = json['numberOfReviews'];
@@ -280,10 +282,10 @@ class ConversionUnits {
   String alternativeUnit;
   int baseCount;
   String baseUnit;
-  int conversionGross;
-  int conversionHeight;
-  int conversionLength;
-  int conversionWidth;
+  double conversionGross;
+  double conversionHeight;
+  double conversionLength;
+  double conversionWidth;
   String ktwUnitFactor;
   String weightUnit;
 

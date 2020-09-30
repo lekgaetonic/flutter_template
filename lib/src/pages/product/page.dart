@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_pro/carousel_pro.dart';
+import 'package:html_unescape/html_unescape.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/custom.dart';
 import 'package:flutter_getx/src/authen/controller.dart';
@@ -23,7 +23,7 @@ class ProductPage extends StatelessWidget {
     _productPageController.getPrimaryImage(productCode, ImageSize.big);
     _productPageController.getGalleryImage(productCode, ImageSize.big);
     _productPageController.getProduct(productCode);
-
+    var unescape = HtmlUnescape();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(56.0), // here the desired height
@@ -32,106 +32,101 @@ class ProductPage extends StatelessWidget {
       //extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: Get.width,
-                      height: 50,
-                      child: Obx(
-                        () => _productPageController
-                                    .galleryImageModel.value.images !=
-                                null
-                            ? Center(
-                                child: Row(
-                                  children: [
-                                    for (var image in _productPageController
-                                        .galleryImageModel.value.images)
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border:
-                                                Border.all(color: Colors.grey)),
-                                        child: Image(
-                                          image: NetworkImage(image.url),
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: Get.width,
+                        height: 50,
+                        child: Obx(
+                          () => _productPageController
+                                      .galleryImageModel.value.images !=
+                                  null
+                              ? Center(
+                                  child: Row(
+                                    children: [
+                                      for (var image in _productPageController
+                                          .galleryImageModel.value.images)
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.grey)),
+                                          child: Image(
+                                            image: NetworkImage(image.url),
+                                          ),
                                         ),
-                                      ),
-                                  ],
-                                ),
-                              )
-                            : Container(),
+                                    ],
+                                  ),
+                                )
+                              : Container(),
+                        ),
                       ),
-                    ),
-                    Container(
-                      width: Get.width,
-                      child: Obx(
-                        () => ClipRRect(
-                          child: InteractiveViewer(
-                            child: CachedNetworkImage(
-                              imageUrl: _productPageController
-                                      .primaryImageModel.value.url ??
-                                  missingImage,
-                              placeholder: (context, url) =>
-                                  new CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  new Icon(Icons.error),
+                      Container(
+                        width: Get.width,
+                        child: Obx(
+                          () => ClipRRect(
+                            child: InteractiveViewer(
+                              child: CachedNetworkImage(
+                                imageUrl: _productPageController
+                                        .primaryImageModel.value.url ??
+                                    missingImage,
+                                placeholder: (context, url) =>
+                                    new CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    new Icon(Icons.error),
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Text(
-                productSummary,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
+                Divider(),
+                Obx(
+                  () => _productPageController.productModel.value != null
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              _productPageController.productModel.value.summary,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                                _productPageController.productModel.value.code),
+                            Text(_productPageController
+                                    .productModel.value.madeIn ??
+                                ''),
+                            Text(_productPageController
+                                    .productModel.value.manufacturer ??
+                                ''),
+                            Text(_productPageController
+                                    .productModel.value.manufacturerAID ??
+                                ''),
+                            Text(unescape.convert(_productPageController
+                                    .productModel.value.description ??
+                                '')),
+                            Text(
+                                _productPageController.productModel.value.ean ??
+                                    ''),
+                            Text(_productPageController.productModel.value
+                                    .ktwImportedCompany.description ??
+                                ''),
+                            Text(_productPageController.productModel.value.stock
+                                    .stockLevelStatus ??
+                                '')
+                          ],
+                        )
+                      : Container(),
                 ),
-              ),
-              Text(
-                productCode,
-                style: TextStyle(),
-                textAlign: TextAlign.start,
-              ),
-              Column(
-                children: [
-                  Obx(
-                    () => _productPageController.productModel.value != null
-                        ? Container(
-                            child: Text(_productPageController
-                                .productModel.value.madeIn
-                                .toString()),
-                          )
-                        : Container(),
-                  ),
-                  Obx(
-                    () => _productPageController.productModel.value != null
-                        ? Container(
-                            child: Text(_productPageController
-                                .productModel.value.manufacturer
-                                .toString()),
-                          )
-                        : Container(),
-                  ),
-                  Obx(
-                    () => _productPageController.productModel.value != null
-                        ? Container(
-                            child: Text(_productPageController
-                                .productModel.value.manufacturerAID
-                                .toString()),
-                          )
-                        : Container(),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
+              ],
+            )),
       ),
     );
   }

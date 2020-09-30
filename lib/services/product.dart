@@ -19,19 +19,22 @@ class ProductService extends ServiceBase {
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
     final http = new IOClient(ioc);
+    try {
+      var response = await http.get(
+          '$endpoint$webroot$version$basesite$_prodcuctPath' + productCode,
+          headers: {
+            'authorization': 'Bearer ${_authenController.accessToken.value}',
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          });
 
-    var response = await http.get(
-        '$endpoint$webroot$version$basesite$_prodcuctPath' + productCode,
-        headers: {
-          'authorization': 'Bearer ${_authenController.accessToken.value}',
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-        });
-
-    var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
-    // print(jsonResponse);
-    if (response.statusCode == 200) {
-      return ProductModel.fromJson(jsonResponse);
-    } else {
+      var jsonResponse = convert.jsonDecode(utf8.decode(response.bodyBytes));
+      // print(jsonResponse);
+      if (response.statusCode == 200) {
+        return ProductModel.fromJson(jsonResponse);
+      } else {
+        return ProductModel();
+      }
+    } catch (ex) {
       return ProductModel();
     }
   }
