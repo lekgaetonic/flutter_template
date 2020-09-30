@@ -68,8 +68,7 @@ class AuthenService extends ServiceBase {
     return _authenModel;
   }
 
-  final AuthenController _authenController = Get.find<AuthenController>();
-  Future<AuthenModel> refreshToken() async {
+  Future<AuthenModel> refreshToken(refreshToken) async {
     final ioc = new HttpClient();
     ioc.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
@@ -78,7 +77,7 @@ class AuthenService extends ServiceBase {
       'client_id': clientId,
       'client_secret': clientSecret,
       'grant_type': grantTypeRefeshToken,
-      'refresh_token': _authenController.refreshToken.value,
+      'refresh_token': refreshToken,
     });
 
     var jsonResponse = convert.jsonDecode(response.body);

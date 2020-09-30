@@ -21,10 +21,12 @@ class App extends StatelessWidget {
           _authenController.gruntType.value = value.getString("gruntType"),
           _authenController.refreshToken.value =
               value.getString("refreshToken"),
-          if (_authenController.accessToken.value != "" &&
+          if (_authenController.accessToken.value != null &&
+              _authenController.accessToken.value != "" &&
+              _authenController.refreshToken.value != null &&
               _authenController.refreshToken.value != "")
             {_authenController.fetchRefreshToken()}
-          else if (_authenController.accessToken.value == "")
+          else
             {_authenController.fetchAuthen()}
         });
 

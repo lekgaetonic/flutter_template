@@ -62,28 +62,36 @@ class AuthenController extends GetxController {
     if (refreshToken.value != "") {
       error.value = "";
       errorDescription.value = "";
+    }
+    prefs.then((value) => {
+          refreshToken.value = value.getString("refreshToken"),
+        });
+    if (refreshToken == null ||
+        refreshToken.value == null ||
+        refreshToken.value == "") {
+      return;
+    }
 
-      authenModel = await AuthenService().refreshToken();
-      if (authenModel.error == "") {
-        prefs.then((value) => {
-              value.setString("accessToken", authenModel.accessToken),
-              value.setString("gruntType", authenModel.gruntType),
-              value.setString("refreshToken", authenModel.refreshToken),
-              value.setInt("expiresIn", authenModel.expiresIn),
-            });
-        gruntType.value = authenModel.gruntType;
-        accessToken.value = authenModel.accessToken;
-        refreshToken.value = authenModel.refreshToken;
-        expiresIn.value = authenModel.expiresIn;
-        print('expiresIn:${expiresIn.value}');
-      } else {
-        error.value = authenModel.error;
-        errorDescription.value = authenModel.errorDescription;
-        Get.snackbar("Login failed", authenModel.errorDescription,
-            icon: Icon(EvaIcons.alertCircleOutline));
+    authenModel = await AuthenService().refreshToken(refreshToken.value);
+    if (authenModel.error == "") {
+      prefs.then((value) => {
+            value.setString("accessToken", authenModel.accessToken),
+            value.setString("gruntType", authenModel.gruntType),
+            value.setString("refreshToken", authenModel.refreshToken),
+            value.setInt("expiresIn", authenModel.expiresIn),
+          });
+      gruntType.value = authenModel.gruntType;
+      accessToken.value = authenModel.accessToken;
+      refreshToken.value = authenModel.refreshToken;
+      expiresIn.value = authenModel.expiresIn;
+      print('expiresIn:${expiresIn.value}');
+    } else {
+      error.value = authenModel.error;
+      errorDescription.value = authenModel.errorDescription;
+      Get.snackbar("Login failed", authenModel.errorDescription,
+          icon: Icon(EvaIcons.alertCircleOutline));
 
-        fetchLogout();
-      }
+      fetchLogout();
     }
   }
 

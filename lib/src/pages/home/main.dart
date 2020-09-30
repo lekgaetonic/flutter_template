@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_getx/constants/theme.dart';
 import 'package:flutter_getx/models/cms.dart';
 import 'package:flutter_getx/src/authen/controller.dart';
+import 'package:flutter_getx/src/pages/account/page.dart';
 import 'package:flutter_getx/src/pages/cart/page.dart';
 import 'package:flutter_getx/src/pages/home/controller.dart';
 import 'package:flutter_getx/src/pages/login/main.dart';
@@ -71,7 +72,9 @@ class HomePage extends StatelessWidget {
           case 2:
             {
               Get.to(
-                LoginPage(),
+                _authenController.gruntType.value == "password"
+                    ? AccountPage()
+                    : LoginPage(),
               );
             }
             break;
